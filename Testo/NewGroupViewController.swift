@@ -13,125 +13,206 @@ import ContactsUI
 
 class NewGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
- var selectedContacts = [[String]] ()
+   var groupName = ""
+   var cModel : ContactModel!
    
    
-   @IBAction func selecting(_ sender: UIBarButtonItem) {
+   
+   @IBOutlet weak var newGroupNameTextfield: UITextField!
+   
+   
+   @IBOutlet weak var GroupNameLabel: UILabel!
+   
+   
+   
+   @IBAction func saveButton(_ sender: UIButton) {
+    
+      groupName = newGroupNameTextfield.text!
+      addCNGroup(groupName: groupName)
       
-      newGroupTableView.setEditing(true, animated: true)
-      editButtonPressed()
-   }
+      
+      
+      
+      
+      
+      
+   }// END Button
+   
+   
+   
+   
+   
+   
    
    
    @IBOutlet weak var newGroupTableView: UITableView!
    
-      
-      var mensallo = TextComposer()
-      var contacts = [CNContact]()
+   
+   var mensallo = TextComposer()
+   var contacts = [CNContact]()
+   
+   
+   
+   
    
    
    //MARK: tableView func
-      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return contacts.count
-      }
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return contacts.count
+   }
    
-      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let  cell = tableView.dequeueReusableCell(withIdentifier: "NewGroupCell", for: indexPath) as? NewGroupTableViewCell
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let  cell = tableView.dequeueReusableCell(withIdentifier: "NewGroupCell", for: indexPath) as? NewGroupTableViewCell
+      let fullname = "\(contacts[indexPath.row].givenName)  \(contacts[indexPath.row].familyName)"
+      
+      cell?.fullName.text  =  fullname //contacts[indexPath.row].givenName //fullname
+      
+      for phoneNumber in contacts[indexPath.row].phoneNumbers {
+         if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
+            let phoneNumberString = phoneNumberStruct.stringValue
+            cell?.phone.text = phoneNumberString
+         }
+      }//end phoneNumber
+      
+      for email in contacts[indexPath.row].emailAddresses {
          
-         cell?.fullName.text  = contacts[indexPath.row].givenName + contacts[indexPath.row].familyName
+         cell?.email.text = email.value as String
+      }//end of email
+      
+      
+      //>>>>>>>>>>>>>>>>>>>
+      if contacts[indexPath.row].imageDataAvailable {
          
+         let image = UIImage(data: contacts[indexPath.row].imageData!)
+         cell?.photo.image = image
+         
+      }
+      
+      return cell!
+      
+   }//end of == tableView func
+   
+   
+   
+   
+   
+   // MARK: Create a MessageComposer
+   let textComposer = TextComposer()
+   
+   
+   
+   
+   //MARK: Select multiple rows and  put a check mark in the row
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+      print("selected  \(contacts[indexPath.row])")
+      
+      if let cell = tableView.cellForRow(at: indexPath) {
+         if cell.isSelected {
+            cell.accessoryType = .checkmark
+         }
+      }
+      
+      if let sr = tableView.indexPathsForSelectedRows {
+         print("didDeselectRowAtIndexPath selected rows:\(sr)")
+      }
+   }
+   
+   
+   
+   
+   
+   //////
+   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+      
+      print("deselected  \(contacts[indexPath.row])")
+      
+      if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+         cell.accessoryType = .none
+      }
+      
+      if let sr = tableView.indexPathsForSelectedRows {
+         print("didDeselectRowAtIndexPath selected rows:\(sr)")
+      }
+   }
+   
+   
+   
+   ///////
+   
+   
+   
+   //MARK: swipit to add to grpoup funcionality
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .insert {
+      // Full name:
+         var fullname = "\(contacts[indexPath.row].givenName)  \(contacts[indexPath.row].familyName)"
+         
+      // Get Primary phone
+         var primarynumber = String()
          for phoneNumber in contacts[indexPath.row].phoneNumbers {
             if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
-               let phoneNumberString = phoneNumberStruct.stringValue
-               cell?.phone.text = phoneNumberString
+               primarynumber = phoneNumberStruct.stringValue
+               
             }
          }//end phoneNumber
          
-         for email in contacts[indexPath.row].emailAddresses {
-            
-            cell?.email.text = email.value as String
+      // email
+         var email = String()
+         for emailx in contacts[indexPath.row].emailAddresses {
+            email = emailx.value as String
          }//end of email
          
          
-         //>>>>>>>>>>>>>>>>>>>
-         if contacts[indexPath.row].imageDataAvailable {
-            
-            let image = UIImage(data: contacts[indexPath.row].imageData!)
-            cell?.photo.image = image
-            
-         }
-         
-         return cell!
-         
-      }//end of == tableView func
-      
-      
-   // MARK: Create a MessageComposer
-      let textComposer = TextComposer()
-   
-      
-      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
-       //   Make sure the device can send text messages
-         if (textComposer.canSendText()) {
-            
-            for phoneNumber in contacts[indexPath.row].phoneNumbers {
-               if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
-                  let phoneNumberString = phoneNumberStruct.stringValue
-                  mensallo.textMessageRecipients.append(phoneNumberString)
-                  print (mensallo.textMessageRecipients)
-                  
-               }
-            }
-            if mensallo.textMessageRecipients.count > 0 {
-               // Obtain a configured MFMessageComposeViewController
-               let messageComposeVC = mensallo.configuredMessageComposeViewController()
-               // Present the configured MFMessageComposeViewController instance
-               present(messageComposeVC, animated: true, completion: nil)
-            }
-            
-         } else {
-            // Let the user know if his/her device isn't able to send text messages
-            let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
-         }
-      }
-      
-   
-    //MARK: NewGroupViewController
-   
-      override func viewDidLoad() {
-         super.viewDidLoad()
-         let titlelabel = "New Group"
-         title =  titlelabel
-         contacts = Info.shared.fetchContacts()
-         newGroupTableView.reloadData()
-         
-         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewGroupViewController.editButtonPressed))
-
-      }
-      
-      override func didReceiveMemoryWarning() {
-         super.didReceiveMemoryWarning()
-        
-      }
-      
-   func editButtonPressed(){
-      newGroupTableView.setEditing(!newGroupTableView.isEditing, animated: true)
-      if newGroupTableView.isEditing == true{
-         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewGroupViewController.editButtonPressed))
-      }else{
-         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewGroupViewController.editButtonPressed))
+         // save  on FB
+         //         cModel.createContact(name: fullname,
+         //                              company: contacts[indexPath.row].organizationName,
+         //                              phone: primarynumber,
+         //                              email: email,
+         //                              extra: "0",
+         //                              notes: "0")
       }
    }
+   
+   
+   //MARK: NewGroupViewController
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      let titlelabel = "New Group"
+      title =  titlelabel
+      contacts = Info.shared.fetchContacts()
+      newGroupTableView.reloadData()
       
       
+   }
+   
+   override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
+      
+   }
+   
+   
+   func addCNGroup (groupName: String) {
+      let contactsStore = CNContactStore()
+      var newGroup = CNMutableGroup()
+      var saveReq = CNSaveRequest()
+      newGroup.name = groupName
+      saveReq.add(newGroup, toContainerWithIdentifier: nil)
+      let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+      do { try contactsStore.execute(saveReq)
+         print ("saved")}
+      catch { print("error") }
       
       
-      
-      
-      
-      
-      
-      
+   }
+
+   
+   
+   
+   
+   
+   
+   
+   
 }// END of ContacsViewController

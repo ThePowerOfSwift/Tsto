@@ -9,6 +9,16 @@
 import UIKit
 
 class MPTableViewCell: UITableViewCell {
+   
+   
+   @IBOutlet weak var fullName: UILabel!
+   
+   @IBOutlet weak var email: UILabel!
+   
+   @IBOutlet weak var phone: UILabel!
+   
+   @IBOutlet weak var photo: UIImageView!
+   
 
     override func awakeFromNib() {
         super.awakeFromNib()

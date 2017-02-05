@@ -16,21 +16,31 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    
    
-   var groups = [ "Family", "Friends", "Coworkers", "Work", "Employees", "class Mates"]
-   
+   var cnGroups = [CNGroup]()
+   var contacts = [CNContact]()
+   var groupName = String ()
+   var cModel : ContactModel!
+   var groups = [ "Yo", "yoyo", "YOYOYO", "TO YOYOYO"]
    
    @IBOutlet weak var collectionView: UICollectionView!
    
    
+   
+   
+   
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return groups.count
+    
+      print(cnGroups.count)
+      
+      return cnGroups.count
+      
    }
    
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mpCollectionCell", for: indexPath) as! MPCollectionViewCell
       
-      cell.groupLabel.text = groups[indexPath.row]
+      cell.groupLabel.text = cnGroups[indexPath.row].name
       
       return cell
    }

@@ -29,7 +29,11 @@ class Info {
       
       let keys = [
          CNContactGivenNameKey,
+         CNContactFamilyNameKey,
+         CNContactBirthdayKey, 
+         CNContactOrganizationNameKey,
          CNContactImageDataKey,
+         CNContactIdentifierKey,
          CNContactThumbnailImageDataKey,
          CNContactImageDataAvailableKey,
          CNContactEmailAddressesKey,

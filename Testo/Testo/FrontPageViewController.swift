@@ -12,6 +12,8 @@ class FrontPageViewController: UIViewController {
    
    
    
+   @IBAction func newGroup(_ sender: UIButton) {
+   }
    
    
 

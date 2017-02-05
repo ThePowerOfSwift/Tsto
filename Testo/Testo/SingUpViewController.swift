@@ -58,7 +58,7 @@ class SingUpViewController: UIViewController {
       let status = CNContactStore.authorizationStatus(for: .contacts)
       if status == .authorized {
          
-         self.performSegue(withIdentifier: "toNewGroupVC", sender: self)
+         self.performSegue(withIdentifier: "toMainPage", sender: self)
       }
       
 
@@ -82,7 +82,7 @@ class SingUpViewController: UIViewController {
          self.contactStore.requestAccess(for: .contacts, completionHandler: { (access, accessError) -> Void in
             if access {
                
-               self.performSegue(withIdentifier: "toNewGroupVC", sender: self)
+               self.performSegue(withIdentifier: "toMainPage", sender: self)
             }
             
             

@@ -10,6 +10,8 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseCore
+import Contacts
+import ContactsUI
 
 
 var contacts = [Contact]()  // needed?
@@ -171,6 +173,7 @@ class Group {
 
    class ContactModel {
    
+   
    static let shared = ContactModel()
    private init() {}
    
@@ -228,4 +231,52 @@ class Group {
             ])
       }
    }
-}
+      
+   //MARK:  Adding new group  to contacts( no contacts on it!)
+      
+      func addCNGroup (groupName: String) {
+         let contactsStore = CNContactStore()
+         var newGroup = CNMutableGroup()
+         var saveReq = CNSaveRequest()
+         newGroup.name = groupName
+         saveReq.add(newGroup, toContainerWithIdentifier: nil)
+         let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+         do { try contactsStore.execute(saveReq)
+            print ("saved")}
+         catch { print("error") }
+         
+         
+      }
+      
+      
+   //search fro  contact in groups
+      func searchForContactsInGroup( groupName: String) {
+         
+         do {
+            let store = CNContactStore()
+            
+            let groups = try store.groups(matching: nil)
+            let filteredGroups = groups.filter { $0.name == groupName }
+            
+            guard let workGroup = filteredGroups.first else {
+               print("No Work group")
+               return
+            }
+            
+            let predicate = CNContact.predicateForContactsInGroup(withIdentifier: workGroup.identifier)
+            let keysToFetch = [CNContactGivenNameKey]
+            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+            
+            print(contacts)
+         }
+         catch {
+            print("Handle error")
+         }
+         
+      }//END searchForContactsInGroup
+      
+ 
+      
+      
+      
+}// END ContactModel
