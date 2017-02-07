@@ -12,105 +12,116 @@ import ContactsUI
 
 class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
-   var groupName = String ()
-   var cModel : ContactModel!
+   let cModel = DataModel.shared
    var mensallo = TextComposer()
-   var contacts = [CNContact]()
-   var groups = [CNGroup] ()
-  
-
+   var contactsInGroups = [CNContact]()
+   var groups = [CNGroup]()
+   
+   
    @IBOutlet weak var mpTableView: UITableView!
    
    
-
+   //MARK: TableView ----------------------------------------------------------------------------------
    
-   
-   //MARK: tableView func
+   //Row
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return contacts.count
-   }
+      return contactsInGroups.count
+   }//@
    
+   //Cell at Row
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let  cell = tableView.dequeueReusableCell(withIdentifier: "mpTableViewCell", for: indexPath) as? MPTableViewCell
-      let fullname = "\(contacts[indexPath.row].givenName)  \(contacts[indexPath.row].familyName)"
-      
-      cell?.fullName.text  =  fullname //contacts[indexPath.row].givenName //fullname
-      
-      for phoneNumber in contacts[indexPath.row].phoneNumbers {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "mpTableViewCell", for: indexPath) as? MPTableViewCell
+      // name
+      let fullname = "\(contactsInGroups[indexPath.row].givenName)  \(contactsInGroups[indexPath.row].familyName)"
+          cell?.fullName.text  =  fullname //contacts[indexPath.row].givenName //fullname
+      //Phone
+      for phoneNumber in contactsInGroups[indexPath.row].phoneNumbers {
          if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
             let phoneNumberString = phoneNumberStruct.stringValue
             cell?.phone.text = phoneNumberString
          }
-      }//end phoneNumber
-      
-      for email in contacts[indexPath.row].emailAddresses {
-         
-         cell?.email.text = email.value as String
-      }//end of email
-      
-      
-      //>>>>>>>>>>>>>>>>>>>
-      if contacts[indexPath.row].imageDataAvailable {
-         
-         let image = UIImage(data: contacts[indexPath.row].imageData!)
-         cell?.photo.image = image
-         
       }
-      
+      //Email
+      for email in contactsInGroups[indexPath.row].emailAddresses {
+         cell?.email.text = email.value as String
+      }
+      // Photo
+      if contactsInGroups[indexPath.row].imageDataAvailable {
+         let image = UIImage(data: contactsInGroups[indexPath.row].imageData!)
+         cell?.photo.image = image
+      }
       return cell!
-      
-   }//end of == tableView func
+   }//@
    
    
    
-   
-   
-   
-   // MARK: Create a MessageComposer
-   let textComposer = TextComposer()
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      contacts = Info.shared.fetchContacts()
-      mpTableView.reloadData()
-
-    searchForContactsInGroup(groupName: "Friend")
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-   func searchForContactsInGroup( groupName: String) {
-      
-      do {
-         let store = CNContactStore()
-         
-         let groups = try store.groups(matching: nil)
-         let filteredGroups = groups.filter { $0.name == groupName }
-         
-         guard let workGroup = filteredGroups.first else {
-            print(" fuck No \(groupName) group")
-            return
+   //SEND TEXT
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      if (mensallo.canSendText()) { // Make sure the device can send text messages
+         for phoneNumber in contactsInGroups[indexPath.row].phoneNumbers {
+            if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
+               let phoneNumberString = phoneNumberStruct.stringValue
+               mensallo.textMessageRecipients.append(phoneNumberString)
+               print (mensallo.textMessageRecipients)
+            }
+         }
+         if mensallo.textMessageRecipients.count > 0 {
+         let messageComposeVC = mensallo.configuredMessageComposeViewController()// Obtain a configured MFMessageComposeViewController
+            present(messageComposeVC, animated: true, completion: nil)// Present the configured MFMessageComposeViewController instance
          }
          
-         let predicate = CNContact.predicateForContactsInGroup(withIdentifier: workGroup.identifier)
-         let keysToFetch = [CNContactGivenNameKey]
-         let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
-         
-         print("this sis the contact .....................\(contacts)")
+      } else {// Let the user know if his/her device isn't able to send text messages
+         let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
+         errorAlert.show()
       }
-      catch {
-         print("Handle error")
+   }//@
+   
+   // MARK: swipt  to add to Call funcionality
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+         
+         
       }
       
-   }//END searchForContactsInGroup
+      
+   }
    
-
+   func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
+      return "CAll" //or customize for each indexPath
+   }
+   
+   //@-------------------------------------------------------------------------------------------------------
    
    
-    }//END MPtableViewController
+   //MARK: viewDidLoad --------------------------------------------------------------------------------------
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      autorization()
+//      mpTableView.delegate = self
+//      mpTableView.dataSource = self
+      contactsInGroups = cModel.searchForContactsInGroup()
+      mpTableView.reloadData()
+      
+   }
+   
+   
+   //MARK: autorization
+   func autorization () {
+      
+      let status = CNContactStore.authorizationStatus(for: .contacts)
+      if status == .authorized {
+         mpTableView.reloadData()
+         
+      } else if status == .denied {
+         let alert = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
+         present(alert, animated: true, completion: nil)
+      }
+      
+   }
+   
+   
+   
+   
+   
+}//END MPtableViewController

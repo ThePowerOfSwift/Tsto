@@ -8,17 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4C1E089A1E3FE76A00CAE5C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E08991E3FE76A00CAE5C9 /* AppDelegate.swift */; };
-		4C1E089C1E3FE76A00CAE5C9 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E089B1E3FE76A00CAE5C9 /* SingUpViewController.swift */; };
-		4C1E089F1E3FE76A00CAE5C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E089D1E3FE76A00CAE5C9 /* Main.storyboard */; };
 		4C1E08A11E3FE76A00CAE5C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E08A01E3FE76A00CAE5C9 /* Assets.xcassets */; };
 		4C1E08A41E3FE76A00CAE5C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E08A21E3FE76A00CAE5C9 /* LaunchScreen.storyboard */; };
 		4C1E08AC1E3FE9E600CAE5C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E08AB1E3FE9E600CAE5C9 /* GoogleService-Info.plist */; };
-		4C252DEC1E404F33001D7AB6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DEB1E404F33001D7AB6 /* DataModel.swift */; };
 		4C252DEF1E40D484001D7AB6 /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DEE1E40D484001D7AB6 /* FrontPageViewController.swift */; };
 		4C252DF31E40D56F001D7AB6 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DF21E40D56F001D7AB6 /* NewGroupViewController.swift */; };
 		4C252DFA1E411018001D7AB6 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DF91E411018001D7AB6 /* LaunchScreenViewController.swift */; };
 		4C252DFC1E412540001D7AB6 /* TextComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DFB1E412540001D7AB6 /* TextComposer.swift */; };
-		4C252DFE1E4125CA001D7AB6 /* ContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DFD1E4125CA001D7AB6 /* ContactsModel.swift */; };
+		4C252DFE1E4125CA001D7AB6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DFD1E4125CA001D7AB6 /* DataModel.swift */; };
 		4C252E001E4127D8001D7AB6 /* NewGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DFF1E4127D8001D7AB6 /* NewGroupTableViewCell.swift */; };
 		4C252E021E41461E001D7AB6 /* contastsDisplayedCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252E011E41461E001D7AB6 /* contastsDisplayedCopy.swift */; };
 		4C252E041E4188D6001D7AB6 /* MPCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252E031E4188D6001D7AB6 /* MPCollectionViewController.swift */; };
@@ -26,6 +23,10 @@
 		4C252E0A1E41903C001D7AB6 /* MPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252E091E41903C001D7AB6 /* MPTableViewController.swift */; };
 		4C252E0C1E41905A001D7AB6 /* MPTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252E0B1E41905A001D7AB6 /* MPTableViewCell.swift */; };
 		4C252E0E1E419609001D7AB6 /* 6834232-geometric-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C252E0D1E419609001D7AB6 /* 6834232-geometric-wallpaper.jpg */; };
+		4CC3908A1E48D92000B3EA3E /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC390891E48D92000B3EA3E /* ContactsUI.framework */; };
+		4CC3908C1E48D93200B3EA3E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC3908B1E48D93200B3EA3E /* Contacts.framework */; };
+		4CC3908E1E48D94700B3EA3E /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC3908D1E48D94700B3EA3E /* CallKit.framework */; };
+		4CC390B51E49139200B3EA3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC390B41E49139200B3EA3E /* Main.storyboard */; };
 		77DE296542F6E19488F5B00D /* Pods_Testo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B197B5018031D9C85296842 /* Pods_Testo.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,18 +34,15 @@
 		3B197B5018031D9C85296842 /* Pods_Testo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Testo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C1E08961E3FE76A00CAE5C9 /* Testo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C1E08991E3FE76A00CAE5C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Testo/AppDelegate.swift; sourceTree = "<group>"; };
-		4C1E089B1E3FE76A00CAE5C9 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingUpViewController.swift; path = Testo/SingUpViewController.swift; sourceTree = "<group>"; };
-		4C1E089E1E3FE76A00CAE5C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C1E08A01E3FE76A00CAE5C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Testo/Assets.xcassets; sourceTree = "<group>"; };
 		4C1E08A31E3FE76A00CAE5C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C1E08A51E3FE76A00CAE5C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Testo/Info.plist; sourceTree = "<group>"; };
 		4C1E08AB1E3FE9E600CAE5C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Testo/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4C252DEB1E404F33001D7AB6 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4C252DEE1E40D484001D7AB6 /* FrontPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrontPageViewController.swift; path = Testo/FrontPageViewController.swift; sourceTree = "<group>"; };
 		4C252DF21E40D56F001D7AB6 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		4C252DF91E411018001D7AB6 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		4C252DFB1E412540001D7AB6 /* TextComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextComposer.swift; sourceTree = "<group>"; };
-		4C252DFD1E4125CA001D7AB6 /* ContactsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsModel.swift; sourceTree = "<group>"; };
+		4C252DFD1E4125CA001D7AB6 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4C252DFF1E4127D8001D7AB6 /* NewGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewCell.swift; sourceTree = "<group>"; };
 		4C252E011E41461E001D7AB6 /* contastsDisplayedCopy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contastsDisplayedCopy.swift; sourceTree = "<group>"; };
 		4C252E031E4188D6001D7AB6 /* MPCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCollectionViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +50,10 @@
 		4C252E091E41903C001D7AB6 /* MPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPTableViewController.swift; sourceTree = "<group>"; };
 		4C252E0B1E41905A001D7AB6 /* MPTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPTableViewCell.swift; sourceTree = "<group>"; };
 		4C252E0D1E419609001D7AB6 /* 6834232-geometric-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "6834232-geometric-wallpaper.jpg"; sourceTree = "<group>"; };
+		4CC390891E48D92000B3EA3E /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		4CC3908B1E48D93200B3EA3E /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		4CC3908D1E48D94700B3EA3E /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		4CC390B41E49139200B3EA3E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4D8ACE5008A8F8D6EBB6DC1F /* Pods-Testo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Testo/Pods-Testo.release.xcconfig"; sourceTree = "<group>"; };
 		63C6211498725E79BC8213D2 /* Pods-Testo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Testo/Pods-Testo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC3908E1E48D94700B3EA3E /* CallKit.framework in Frameworks */,
+				4CC3908C1E48D93200B3EA3E /* Contacts.framework in Frameworks */,
+				4CC3908A1E48D92000B3EA3E /* ContactsUI.framework in Frameworks */,
 				77DE296542F6E19488F5B00D /* Pods_Testo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +76,9 @@
 		37AC719D6AD4840DAAF12E0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CC3908D1E48D94700B3EA3E /* CallKit.framework */,
+				4CC3908B1E48D93200B3EA3E /* Contacts.framework */,
+				4CC390891E48D92000B3EA3E /* ContactsUI.framework */,
 				3B197B5018031D9C85296842 /* Pods_Testo.framework */,
 			);
 			name = Frameworks;
@@ -115,9 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				4C1E08991E3FE76A00CAE5C9 /* AppDelegate.swift */,
-				4C252DEB1E404F33001D7AB6 /* DataModel.swift */,
 				4C252DFB1E412540001D7AB6 /* TextComposer.swift */,
-				4C252DFD1E4125CA001D7AB6 /* ContactsModel.swift */,
+				4C252DFD1E4125CA001D7AB6 /* DataModel.swift */,
 			);
 			name = Global;
 			path = ..;
@@ -126,8 +133,8 @@
 		4C252DED1E40D443001D7AB6 /* Mainpage */ = {
 			isa = PBXGroup;
 			children = (
-				4C1E089D1E3FE76A00CAE5C9 /* Main.storyboard */,
 				4C252DEE1E40D484001D7AB6 /* FrontPageViewController.swift */,
+				4CC390B41E49139200B3EA3E /* Main.storyboard */,
 				4C252E081E419002001D7AB6 /* MPTableView */,
 				4C252E071E418A3D001D7AB6 /* CollectionView */,
 			);
@@ -138,7 +145,6 @@
 		4C252DF01E40D4AE001D7AB6 /* SingUp */ = {
 			isa = PBXGroup;
 			children = (
-				4C1E089B1E3FE76A00CAE5C9 /* SingUpViewController.swift */,
 			);
 			name = SingUp;
 			path = ..;
@@ -255,9 +261,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1E08A41E3FE76A00CAE5C9 /* LaunchScreen.storyboard in Resources */,
+				4CC390B51E49139200B3EA3E /* Main.storyboard in Resources */,
 				4C1E08AC1E3FE9E600CAE5C9 /* GoogleService-Info.plist in Resources */,
 				4C1E08A11E3FE76A00CAE5C9 /* Assets.xcassets in Resources */,
-				4C1E089F1E3FE76A00CAE5C9 /* Main.storyboard in Resources */,
 				4C252E0E1E419609001D7AB6 /* 6834232-geometric-wallpaper.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,13 +325,11 @@
 			files = (
 				4C252DFC1E412540001D7AB6 /* TextComposer.swift in Sources */,
 				4C252DF31E40D56F001D7AB6 /* NewGroupViewController.swift in Sources */,
-				4C1E089C1E3FE76A00CAE5C9 /* SingUpViewController.swift in Sources */,
 				4C252DEF1E40D484001D7AB6 /* FrontPageViewController.swift in Sources */,
 				4C252E041E4188D6001D7AB6 /* MPCollectionViewController.swift in Sources */,
 				4C252E061E4189B9001D7AB6 /* MPCollectionViewCell.swift in Sources */,
 				4C1E089A1E3FE76A00CAE5C9 /* AppDelegate.swift in Sources */,
-				4C252DEC1E404F33001D7AB6 /* DataModel.swift in Sources */,
-				4C252DFE1E4125CA001D7AB6 /* ContactsModel.swift in Sources */,
+				4C252DFE1E4125CA001D7AB6 /* DataModel.swift in Sources */,
 				4C252E0A1E41903C001D7AB6 /* MPTableViewController.swift in Sources */,
 				4C252E0C1E41905A001D7AB6 /* MPTableViewCell.swift in Sources */,
 				4C252E001E4127D8001D7AB6 /* NewGroupTableViewCell.swift in Sources */,
@@ -337,15 +341,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4C1E089D1E3FE76A00CAE5C9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C1E089E1E3FE76A00CAE5C9 /* Base */,
-			);
-			name = Main.storyboard;
-			path = Testo;
-			sourceTree = "<group>";
-		};
 		4C1E08A21E3FE76A00CAE5C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
