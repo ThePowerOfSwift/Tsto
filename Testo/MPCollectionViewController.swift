@@ -16,47 +16,77 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    
    
-   var cnGroups = [CNGroup]()
+   var groups = [CNGroup]()
    var contacts = [CNContact]()
-   var groupName = String ()
-   var cModel : ContactModel!
-   var groups = [ "Yo", "yoyo", "YOYOYO", "TO YOYOYO"]
+   var groupsNames = [String] ()
+   let cModel = DataModel.shared
+
    
    @IBOutlet weak var collectionView: UICollectionView!
    
    
    
-   
-   
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-      print(cnGroups.count)
       
-      return cnGroups.count
+      print(groupsNames.count)
+      return groups.count
       
    }
    
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mpCollectionCell", for: indexPath) as! MPCollectionViewCell
-      
-      cell.groupLabel.text = cnGroups[indexPath.row].name
-      
+      cell.groupLabel.text = groups[indexPath.row].name
       return cell
    }
    
+   //MARK: ViewDidLoad ------------------------------------------------------------------------------------------------
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      autorization()
+      groups = getGRoups()
+      collectionView.reloadData()
+      
+   }//@
    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+   
+   func getGRoups() -> [CNGroup] {
+      
+      let store = CNContactStore()
+      var allGroups = [CNGroup]()
+      do {
+         allGroups = try store.groups(matching: nil)
+         for groupx in allGroups {
+            var groupsId = [String]()
+            groupsId.append(groupx.identifier)
+            groupsNames.append(groupx.name)
+         print ("-------------------------------------------------------------------------")
+         print (groupx.name)
+         print (groupsNames.count)
+         print (groupsId.count)
+         groups = allGroups
+         }
+       } catch {
+         print("Error fetching Groups")
+         }
+   return groups
+   }//@
+   
+   func autorization () {
+      
+      let status = CNContactStore.authorizationStatus(for: .contacts)
+      if status == .authorized {
+         collectionView.reloadData()
+         
+      } else if status == .denied {
+         let alert = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
+         present(alert, animated: true, completion: nil)
+      }
+      
+   }
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
+   
+   
+   
    
 }//END of MPViewController
