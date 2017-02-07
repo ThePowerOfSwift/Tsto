@@ -25,10 +25,7 @@ class FrontPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      let titlelabel = "Testo"
-      title =  titlelabel
-      
-      contactAcces()
+            contactAcces()
 
     }
 

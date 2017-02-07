@@ -17,7 +17,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    let cModel = DataModel.shared
    var mensallo = TextComposer()
    var contacts = [CNContact]()
-   var selecteed = [CNContact]()
+   var selectedSrings = [String]()
    
 
    
@@ -30,11 +30,12 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    
    
    @IBAction func saveButton(_ sender: UIButton) {
-      
       groupName = newGroupNameTextfield.text!
-      cModel.addCNGroup(groupName: groupName)          
-      
-      
+      let ids = getArrayofContactsID()
+     cModel.addContactToGroup(contactIdentifiers: ids, groupName: groupName)
+   
+   
+   
    }// END Button
    
 
@@ -44,9 +45,14 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    
    
    //MARK: tableView func
+   
+   
+   
+   
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return contacts.count
    }
+   
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       let  cell = tableView.dequeueReusableCell(withIdentifier: "NewGroupCell", for: indexPath) as? NewGroupTableViewCell
@@ -147,7 +153,20 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       
    }
 
-   
+   func getArrayofContactsID () -> [String] {
+      
+      if let indexPaths = newGroupTableView.indexPathsForSelectedRows {
+         for indexPath in indexPaths {
+            let contactID = contacts[indexPath.row].identifier
+            selectedSrings.append(contactID)
+         }
+      } else {
+         let alert = UIAlertController(title: "Oops!", message: "there is no contacts selected ", preferredStyle: UIAlertControllerStyle.alert)
+         present(alert, animated: true, completion: nil)
+      }
+      return selectedSrings
+   }
+
    
    
    

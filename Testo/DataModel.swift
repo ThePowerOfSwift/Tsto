@@ -169,8 +169,76 @@ class DataModel {
       
    }
    
+   func addContactToGroup2(contactIdentifiers: String, groupName: String) {
+      
+      let store = CNContactStore()
+      
+      var cotacto = CNContact()
+      var grupo = CNGroup()
+      do {
+         let keysToFetch = [CNContactIdentifierKey,
+                            CNContactViewController.descriptorForRequiredKeys()] as [Any]
+         cotacto = try store.unifiedContact(withIdentifier: contactIdentifiers, keysToFetch:keysToFetch as! [CNKeyDescriptor])
+      } catch let error{
+         print(error)
+      }
+      
+      var newGroup = CNMutableGroup()
+      let saveRequest1 = CNSaveRequest()
+      newGroup.name = groupName
+      grupo = newGroup
+      saveRequest1.add(newGroup, toContainerWithIdentifier: nil)
+      let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+      do { try store.execute(saveRequest1)
+         print ("saved")}
+      catch { print("error") }
+      
+      
+      
+      
+      let saveRequest2 = CNSaveRequest()
+      saveRequest2.addMember(cotacto, to: grupo)
+      do{
+         try store.execute(saveRequest2)
+      } catch let error{
+         print(error)
+      }
+      
+   }
 
-  
+   func addContactToGroup(contactIdentifiers: [String], groupName: String) {
+     // creatGroup
+      let store = CNContactStore()
+      var cotacto = CNContact()
+      var grupo = CNGroup()
+      var newGroup = CNMutableGroup()
+      let saveRequest1 = CNSaveRequest()
+         newGroup.name = groupName
+         grupo = newGroup
+         saveRequest1.add(newGroup, toContainerWithIdentifier: nil)
+         do { try store.execute(saveRequest1)
+         print ("saved")
+        } catch {  let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+         print("error") }
+      
+      //Add contacts to group
+      for id in contactIdentifiers  {
+        do {
+        let keysToFetch = [CNContactIdentifierKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
+            cotacto = try store.unifiedContact(withIdentifier: id, keysToFetch:keysToFetch as! [CNKeyDescriptor])
+        } catch let error{ print(error)}
+      let saveRequest2 = CNSaveRequest()
+      saveRequest2.addMember(cotacto, to: grupo)
+      do{
+         try store.execute(saveRequest2)
+      } catch let error{
+         print(error)
+      }
+      
+   }
+   }
+   
+
    
    
    
