@@ -31,6 +31,9 @@ class MPTableViewCell: UITableViewCell {
       super.prepareForReuse()
       
       photo.image = nil
+      fullName.text = nil
+      phone.text = nil
+      email.text = nil 
    }
 
 

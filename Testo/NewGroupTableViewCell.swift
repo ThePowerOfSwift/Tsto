@@ -30,6 +30,10 @@ class NewGroupTableViewCell: UITableViewCell {
       super.prepareForReuse()
       
       photo.image = nil
+      email.text = nil
+      phone.text = nil
+      fullName.text = nil
+      
    }
 
 

@@ -14,8 +14,9 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    let cModel = DataModel.shared
    var mensallo = TextComposer()
-   var contactsInGroups = [CNContact]()
+   var contactsLookup = [[CNContact]]()
    var groups = [CNGroup]()
+   var groupNames = [String] ()
    
    
    @IBOutlet weak var mpTableView: UITableView!
@@ -23,31 +24,44 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    //MARK: TableView ----------------------------------------------------------------------------------
    
+
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return groupNames.count
+   }
+   
+   
+   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      
+      return groupNames[section]
+   }
+
    //Row
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return contactsInGroups.count
+      return contactsLookup[section].count
    }//@
    
    //Cell at Row
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       let cell = tableView.dequeueReusableCell(withIdentifier: "mpTableViewCell", for: indexPath) as? MPTableViewCell
       // name
-      let fullname = "\(contactsInGroups[indexPath.row].givenName)  \(contactsInGroups[indexPath.row].familyName)"
+      
+      let groupX = contactsLookup[indexPath.section]
+      let fullname = "\(groupX[indexPath.row].givenName)  \(groupX[indexPath.row].familyName)"
           cell?.fullName.text  =  fullname //contacts[indexPath.row].givenName //fullname
       //Phone
-      for phoneNumber in contactsInGroups[indexPath.row].phoneNumbers {
+      for phoneNumber in groupX[indexPath.row].phoneNumbers {
          if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
             let phoneNumberString = phoneNumberStruct.stringValue
             cell?.phone.text = phoneNumberString
          }
       }
       //Email
-      for email in contactsInGroups[indexPath.row].emailAddresses {
+      for email in groupX[indexPath.row].emailAddresses {
          cell?.email.text = email.value as String
       }
       // Photo
-      if contactsInGroups[indexPath.row].imageDataAvailable {
-         let image = UIImage(data: contactsInGroups[indexPath.row].imageData!)
+      if groupX[indexPath.row].imageDataAvailable {
+         let image = UIImage(data: groupX[indexPath.row].imageData!)
          cell?.photo.image = image
       }
       return cell!
@@ -58,7 +72,8 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    //SEND TEXT
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       if (mensallo.canSendText()) { // Make sure the device can send text messages
-         for phoneNumber in contactsInGroups[indexPath.row].phoneNumbers {
+         let groupX = contactsLookup[indexPath.section]
+         for phoneNumber in groupX[indexPath.row].phoneNumbers {
             if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
                let phoneNumberString = phoneNumberStruct.stringValue
                mensallo.textMessageRecipients.append(phoneNumberString)
@@ -77,20 +92,32 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    }//@
    
    // MARK: swipt  to add to Call funcionality
-   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-         
-         
-      }
-      
-      
-   }
+      func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+         let call = UITableViewRowAction(style: .default, title: "CAll") { (action, indexPath) in
+            
+            
+            let groupX = self.contactsLookup[indexPath.section]
+            for phoneNumber in groupX[indexPath.row].phoneNumbers {
+               if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
+                  let phoneNumberString = phoneNumberStruct.stringValue
+                  let numericSet = "0123456789"
+                  let filteredCharacters = phoneNumberString.characters.filter {
+                     return numericSet.contains(String($0))
+                  }
+                  let filteredString = String(filteredCharacters)
+                   print(groupX[indexPath.row].givenName)
+                  print(filteredString)
+            guard let number = URL(string: "telprompt://" + filteredString ) else { return }
+            UIApplication.shared.open(number, options: [:], completionHandler: nil)
+               }
+            }
+         }
+         call.backgroundColor = UIColor.green
+      return [call]
+      }//@
    
-   func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
-      return "CAll" //or customize for each indexPath
-   }
    
-   //@-------------------------------------------------------------------------------------------------------
+   //@ TableView  Funcs -------------------------------------------------------------------------------------------------------
    
    
    //MARK: viewDidLoad --------------------------------------------------------------------------------------
@@ -100,7 +127,10 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
       autorization()
 //      mpTableView.delegate = self
 //      mpTableView.dataSource = self
-      contactsInGroups = cModel.searchForContactsInGroup()
+   contactsLookup = cModel.getContactsByGroup()
+      print (contactsLookup)
+   groupNames  = cModel.getGroupsNames()
+    contactsLookup = cModel.getContactsByGroup()
       mpTableView.reloadData()
       
    }

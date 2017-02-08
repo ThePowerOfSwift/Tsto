@@ -27,7 +27,6 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      
       print(groupsNames.count)
       return groups.count
       
@@ -40,6 +39,11 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       return cell
    }
    
+      
+   
+   
+   
+   
    //MARK: ViewDidLoad ------------------------------------------------------------------------------------------------
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -48,6 +52,7 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       collectionView.reloadData()
       
    }//@
+   
    
    
    func getGRoups() -> [CNGroup] {
@@ -71,6 +76,9 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
          }
    return groups
    }//@
+   
+   
+   
    
    func autorization () {
       
