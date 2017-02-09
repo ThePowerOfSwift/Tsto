@@ -12,19 +12,37 @@ import ContactsUI
 
 class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
+   
+   
    let cModel = DataModel.shared
    var mensallo = TextComposer()
    var contactsLookup = [[CNContact]]()
    var groups = [CNGroup]()
    var groupNames = [String] ()
-   
+   weak var delageta : CellDelegate?
    
    @IBOutlet weak var mpTableView: UITableView!
    
    
-   //MARK: TableView ----------------------------------------------------------------------------------
+   @IBAction func crollToSection(_ sender: UIButton) {
+     
+      
+   }
    
-
+   
+   
+   
+   
+   //MARK: TableView ----------------------------------------------------------------------------------
+   func scrollToFirstRow(section: Int) {
+      let indexPath = IndexPath(row: 0, section: 8)
+      self.mpTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)  //(indexPath, atScrollPosition: .Top, animated: true)
+      
+   
+      
+      
+   }
+   
    func numberOfSections(in tableView: UITableView) -> Int {
       return groupNames.count
    }
@@ -126,7 +144,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
       
       autorization()
 //      mpTableView.delegate = self
-//      mpTableView.dataSource = self
+//    mpTableView.dataSource = self
    contactsLookup = cModel.getContactsByGroup()
       print (contactsLookup)
    groupNames  = cModel.getGroupsNames()
@@ -155,3 +173,14 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    
 }//END MPtableViewController
+
+extension MPTableViewController : CellDelegate{
+   
+
+   internal func didSelectedSection(section: Int) {
+      
+      mpTableView.scrollToRow(at: IndexPath(row: 0, section: section ), at: .top, animated: true)         
+   }
+
+   
+}

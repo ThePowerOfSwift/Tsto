@@ -15,6 +15,10 @@ import ContactsUI
 
 class FrontPageViewController: UIViewController {
    
+   var groupSelected : GroupSelected!
+   var tvc : MPTableViewController!
+   var cvc : MPCollectionViewController!
+   var gvc : GroupMenuViewController!
    
    
    @IBAction func newGroup(_ sender: UIButton) {
@@ -28,6 +32,12 @@ class FrontPageViewController: UIViewController {
             contactAcces()
 
     }
+   
+   
+   override func viewDidAppear(_ animated: Bool) {
+      tvc.delageta = cvc
+      cvc.delageta = tvc
+   }
 
    
    func contactAcces() {
@@ -59,4 +69,21 @@ class FrontPageViewController: UIViewController {
    
 
 
-}
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      switch segue.identifier ?? ""  {
+      case "toMenu" :
+        let destination = segue.destination as? GroupMenuViewController
+            destination?.groupSelected = groupSelected
+         
+      case "toTCV" :
+         tvc = segue.destination as? MPTableViewController
+         
+      case "toCVV" :
+         cvc = segue.destination as? MPCollectionViewController
+      default :
+         ()
+      }
+
+      
+      }
+}//@ FrontPageViewController

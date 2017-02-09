@@ -15,11 +15,12 @@ import ContactsUI
 class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
    
    
-   
    var groups = [CNGroup]()
    var contacts = [CNContact]()
    var groupsNames = [String] ()
    let cModel = DataModel.shared
+   var selected = ""
+   weak var delageta : CellDelegate?
 
    
    @IBOutlet weak var collectionView: UICollectionView!
@@ -35,12 +36,34 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mpCollectionCell", for: indexPath) as! MPCollectionViewCell
-      cell.groupLabel.text = groups[indexPath.row].name
+      cell.groupLabel.text = groups[indexPath.item].name
+      var cellIndex = collectionView.indexPathsForVisibleItems
+
       return cell
    }
    
-      
    
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+      let frontPageVC = self.parent as! FrontPageViewController
+      frontPageVC.groupSelected = GroupSelected(name: groups[indexPath.item].name, idetifier: groups[indexPath.item].identifier)
+      frontPageVC.performSegue(withIdentifier: "toMenu", sender: groups[indexPath.row])
+   }
+   
+   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+      var visibleRect = CGRect()
+      
+      visibleRect.origin = collectionView.contentOffset
+      visibleRect.size = collectionView.bounds.size
+      
+      let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+      
+      let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
+      print ("#############################")
+      print(visibleIndexPath)
+      delageta?.didSelectedSection(section: visibleIndexPath.section)
+      
+   }
    
    
    
@@ -50,6 +73,16 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       autorization()
       groups = getGRoups()
       collectionView.reloadData()
+      
+      let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+      let width = UIScreen.main.bounds.width
+      layout.itemSize = CGSize(width: width, height: 130)
+      layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+      layout.minimumInteritemSpacing = 0
+      layout.minimumLineSpacing = 0
+      layout.scrollDirection = .horizontal
+      collectionView?.collectionViewLayout = layout
+      
       
    }//@
    
@@ -97,4 +130,17 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    
    
-}//END of MPViewController
+}//END of MPCollectionViewController
+
+
+extension MPCollectionViewController : CellDelegate {
+   internal func didSelectedSection(section: Int) {
+      
+      collectionView.scrollToItem(at: IndexPath(row: 0, section: section ), at: .top, animated: true)
+   }
+
+   
+   
+   
+   
+}
