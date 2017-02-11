@@ -23,7 +23,7 @@ class DataModel {
    
    
    
-   
+   //MARK: AUTORIZATION
    func autorization (vc: UIViewController) {
       let status = CNContactStore.authorizationStatus(for: .contacts)
       if status == .authorized {
@@ -99,7 +99,7 @@ class DataModel {
       do {
          allGroups = try store.groups(matching: nil)
          for groupx in allGroups {
-            var groupsId = [String]()
+         var groupsId = [String]()
             groupsId.append(groupx.identifier)
             do {
                let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupx.identifier)
@@ -131,23 +131,23 @@ class DataModel {
    func getContactsPerGroup(groupIdentifier: String ) ->  [CNContact]{
       var contactsData = [CNContact]()
       let store = CNContactStore()
-                  do {
-               let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
-               let keysToFetch = [CNContactGivenNameKey,
-                                  CNContactFamilyNameKey,
-                                  CNContactBirthdayKey,
-                                  CNContactOrganizationNameKey,
-                                  CNContactImageDataKey,
-                                  CNContactIdentifierKey,
-                                  CNContactThumbnailImageDataKey,
-                                  CNContactImageDataAvailableKey,
-                                  CNContactEmailAddressesKey,
-                                  CNContactPhoneNumbersKey]
-               let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
-               contactsData += contact
-            } catch {
-               print(" fuck No \(groupIdentifier) group")
-            }
+      do {
+         let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
+         let keysToFetch = [CNContactGivenNameKey,
+                            CNContactFamilyNameKey,
+                            CNContactBirthdayKey,
+                            CNContactOrganizationNameKey,
+                            CNContactImageDataKey,
+                            CNContactIdentifierKey,
+                            CNContactThumbnailImageDataKey,
+                            CNContactImageDataAvailableKey,
+                            CNContactEmailAddressesKey,
+                            CNContactPhoneNumbersKey]
+         let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+         contactsData += contact
+      } catch {
+         print(" fuck No \(groupIdentifier) group")
+      }
       
       
       return contactsData
@@ -172,6 +172,23 @@ class DataModel {
    
    
    
+   func groupContactCount (groupIdentifier: String ) ->  Int{
+   var contactsData = [CNContact]()
+   let store = CNContactStore()
+   do {
+   let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
+   let keysToFetch = [CNContactPhoneNumbersKey]
+   let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+   contactsData += contact
+   } catch {
+   print(" fuck No \(groupIdentifier) group")
+   }
+   
+   return contactsData.count
+   }
+
+   
+   
    //MARK: getGroupsId
    func getGroupsId() -> [String] {
       
@@ -182,7 +199,6 @@ class DataModel {
          allGroups = try store.groups(matching: nil)
          for groupx in allGroups {
             allGroupsID.append(groupx.identifier)
-            print ("-------------------------------------------------------------------------")
             print (groupx.name)
             print (allGroupsID.count)
          }
@@ -200,7 +216,6 @@ class DataModel {
       let store = CNContactStore()
       var allGroups = getGroupsId()
       var addding = [CNContact]()
-      
       for group in allGroups {
          do {
             let predicate = CNContact.predicateForContactsInGroup(withIdentifier: group)
@@ -274,6 +289,7 @@ class DataModel {
       }
    }//@addContactToGroup
    
+   
    //MARK: getGroupsNames
    func getGroupsNames() -> [String] {
       let store = CNContactStore()
@@ -282,10 +298,9 @@ class DataModel {
       do {
          allGroups = try store.groups(matching: nil)
          for groupx in allGroups {
-            allGroupsNames.append(groupx.name)
-            print ("-------------------------------------------------------------------------")
-            print (groupx.name)
-            print (allGroupsNames.count)
+         allGroupsNames.append(groupx.name)
+         print (groupx.name)
+         print (allGroupsNames.count)
          }
       } catch {
          print("Error fetching Groups")

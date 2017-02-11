@@ -11,7 +11,8 @@ import UIKit
 
 class ContactsListFlowLayout: UICollectionViewFlowLayout {
    
-   let itemHeight: CGFloat = 80
+   let itemHeight: CGFloat = 158
+   
    
    override init() {
       super.init()
@@ -34,8 +35,8 @@ class ContactsListFlowLayout: UICollectionViewFlowLayout {
     Sets up the layout for the collectionView. 0 distance between each cell, and vertical layout
     */
    func setupLayout() {
-      minimumInteritemSpacing = 0
-      minimumLineSpacing = 1
+      minimumInteritemSpacing = 5
+      minimumLineSpacing = 5
       scrollDirection = .vertical
    }
    

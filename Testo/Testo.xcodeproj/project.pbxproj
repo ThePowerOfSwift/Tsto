@@ -18,6 +18,9 @@
 		4C1E08A41E3FE76A00CAE5C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E08A21E3FE76A00CAE5C9 /* LaunchScreen.storyboard */; };
 		4C1E08AC1E3FE9E600CAE5C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C1E08AB1E3FE9E600CAE5C9 /* GoogleService-Info.plist */; };
 		4C2322351E4E9BF500BABB6D /* EditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2322341E4E9BF500BABB6D /* EditTableViewCell.swift */; };
+		4C2322371E4F9FE800BABB6D /* callNtextProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2322361E4F9FE800BABB6D /* callNtextProtocal.swift */; };
+		4C2322391E4FBE0B00BABB6D /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2322381E4FBE0B00BABB6D /* AddContactTableViewCell.swift */; };
+		4C23223B1E4FBE2200BABB6D /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C23223A1E4FBE2200BABB6D /* AddContactViewController.swift */; };
 		4C252DEF1E40D484001D7AB6 /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DEE1E40D484001D7AB6 /* FrontPageViewController.swift */; };
 		4C252DF31E40D56F001D7AB6 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DF21E40D56F001D7AB6 /* NewGroupViewController.swift */; };
 		4C252DFA1E411018001D7AB6 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C252DF91E411018001D7AB6 /* LaunchScreenViewController.swift */; };
@@ -52,6 +55,9 @@
 		4C1E08A51E3FE76A00CAE5C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Testo/Info.plist; sourceTree = "<group>"; };
 		4C1E08AB1E3FE9E600CAE5C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Testo/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C2322341E4E9BF500BABB6D /* EditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewCell.swift; sourceTree = "<group>"; };
+		4C2322361E4F9FE800BABB6D /* callNtextProtocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = callNtextProtocal.swift; sourceTree = "<group>"; };
+		4C2322381E4FBE0B00BABB6D /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
+		4C23223A1E4FBE2200BABB6D /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		4C252DEE1E40D484001D7AB6 /* FrontPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrontPageViewController.swift; path = Testo/FrontPageViewController.swift; sourceTree = "<group>"; };
 		4C252DF21E40D56F001D7AB6 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		4C252DF91E411018001D7AB6 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,9 @@
 				4C0A59B31E4E5AA3002EF0AC /* ContactsGridFlowLayout.swift */,
 				4C0A59B51E4E5B3D002EF0AC /* allContactsCollectionViewCell.swift */,
 				4C0A59B71E4E5B82002EF0AC /* AllContactsViewController.swift */,
+				4C2322361E4F9FE800BABB6D /* callNtextProtocal.swift */,
+				4C2322381E4FBE0B00BABB6D /* AddContactTableViewCell.swift */,
+				4C23223A1E4FBE2200BABB6D /* AddContactViewController.swift */,
 			);
 			name = "All Contacts";
 			sourceTree = "<group>";
@@ -353,6 +362,8 @@
 				4C0A59B41E4E5AA3002EF0AC /* ContactsGridFlowLayout.swift in Sources */,
 				4C0A59B81E4E5B82002EF0AC /* AllContactsViewController.swift in Sources */,
 				4C252DFC1E412540001D7AB6 /* TextComposer.swift in Sources */,
+				4C2322371E4F9FE800BABB6D /* callNtextProtocal.swift in Sources */,
+				4C23223B1E4FBE2200BABB6D /* AddContactViewController.swift in Sources */,
 				4C252DF31E40D56F001D7AB6 /* NewGroupViewController.swift in Sources */,
 				4C252DEF1E40D484001D7AB6 /* FrontPageViewController.swift in Sources */,
 				4C252E041E4188D6001D7AB6 /* MPCollectionViewController.swift in Sources */,
@@ -363,6 +374,7 @@
 				4C1E089A1E3FE76A00CAE5C9 /* AppDelegate.swift in Sources */,
 				4C0A59AE1E4E49E1002EF0AC /* EditGroupViewController.swift in Sources */,
 				4C252DFE1E4125CA001D7AB6 /* DataModel.swift in Sources */,
+				4C2322391E4FBE0B00BABB6D /* AddContactTableViewCell.swift in Sources */,
 				4C252E0A1E41903C001D7AB6 /* MPTableViewController.swift in Sources */,
 				4C0A59B11E4E5A65002EF0AC /* ContactsListFlowLayout.swift in Sources */,
 				4C252E0C1E41905A001D7AB6 /* MPTableViewCell.swift in Sources */,

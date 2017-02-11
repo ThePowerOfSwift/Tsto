@@ -11,7 +11,7 @@ import UIKit
 
 class ContactsGridFlowLayout: UICollectionViewFlowLayout {
    
-   let itemHeight: CGFloat = 110
+   let itemHeight: CGFloat = 158
    
    override init() {
       super.init()

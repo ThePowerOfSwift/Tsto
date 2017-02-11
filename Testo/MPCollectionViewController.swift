@@ -21,7 +21,7 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    let cModel = DataModel.shared
    var selected = ""
    weak var delageta : CellDelegate?
-
+   
    
    @IBOutlet weak var collectionView: UICollectionView!
    
@@ -30,7 +30,6 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       print(groupsNames.count)
       return groups.count
-      
    }
    
    
@@ -38,13 +37,11 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mpCollectionCell", for: indexPath) as! MPCollectionViewCell
       cell.groupLabel.text = groups[indexPath.item].name
       var cellIndex = collectionView.indexPathsForVisibleItems
-
       return cell
    }
    
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
       let frontPageVC = self.parent as! FrontPageViewController
       frontPageVC.groupSelected = GroupSelected(name: groups[indexPath.item].name, idetifier: groups[indexPath.item].identifier)
       frontPageVC.performSegue(withIdentifier: "toMenu", sender: groups[indexPath.row])
@@ -52,16 +49,13 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
       var visibleRect = CGRect()
-      
       visibleRect.origin = collectionView.contentOffset
       visibleRect.size = collectionView.bounds.size
-      
       let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-      
       let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
       print ("#############################")
-      print(visibleIndexPath)
-      delageta?.didSelectedSection(section: visibleIndexPath.section)
+      print(visibleIndexPath.section)
+      delageta?.didSelectedSection(section: visibleIndexPath.item)
       
    }
    
@@ -73,7 +67,6 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       autorization()
       groups = getGRoups()
       collectionView.reloadData()
-      
       let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
       let width = UIScreen.main.bounds.width
       layout.itemSize = CGSize(width: width, height: 130)
@@ -82,14 +75,16 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       layout.minimumLineSpacing = 0
       layout.scrollDirection = .horizontal
       collectionView?.collectionViewLayout = layout
-      
-      
    }//@
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      collectionView.reloadData()
+   }
    
    
    
    func getGRoups() -> [CNGroup] {
-      
       let store = CNContactStore()
       var allGroups = [CNGroup]()
       do {
@@ -98,49 +93,40 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             var groupsId = [String]()
             groupsId.append(groupx.identifier)
             groupsNames.append(groupx.name)
-         print ("-------------------------------------------------------------------------")
-         print (groupx.name)
-         print (groupsNames.count)
-         print (groupsId.count)
-         groups = allGroups
+            print ("-------------------------------------------------------------------------")
+            print (groupx.name)
+            print (groupsNames.count)
+            print (groupsId.count)
+            groups = allGroups
          }
-       } catch {
+      } catch {
          print("Error fetching Groups")
-         }
-   return groups
+      }
+      return groups
    }//@
    
    
    
    
    func autorization () {
-      
       let status = CNContactStore.authorizationStatus(for: .contacts)
       if status == .authorized {
          collectionView.reloadData()
-         
       } else if status == .denied {
          let alert = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
          present(alert, animated: true, completion: nil)
       }
       
    }
-
-   
-   
-   
    
 }//END of MPCollectionViewController
 
-
 extension MPCollectionViewController : CellDelegate {
    internal func didSelectedSection(section: Int) {
-      
-      collectionView.scrollToItem(at: IndexPath(row: 0, section: section ), at: .top, animated: true)
+      let idetifair = groups[section].identifier
+      let count =  cModel.groupContactCount(groupIdentifier: idetifair)
+      if section <=  count {
+         collectionView.scrollToItem(at: IndexPath(row: section , section: 0 ), at: .top, animated: true)
+    }
    }
-
-   
-   
-   
-   
-}
+}//@extension

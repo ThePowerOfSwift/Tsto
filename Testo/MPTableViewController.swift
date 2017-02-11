@@ -35,7 +35,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    //MARK: TableView ----------------------------------------------------------------------------------
    func scrollToFirstRow(section: Int) {
-      let indexPath = IndexPath(row: 0, section: 8)
+      let indexPath = IndexPath(row: 0, section: section)
       self.mpTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
       
    }
@@ -175,8 +175,13 @@ extension MPTableViewController : CellDelegate{
    
 
    internal func didSelectedSection(section: Int) {
-      
-      mpTableView.scrollToRow(at: IndexPath(row: 0, section: section ), at: .none, animated: true)
+ 
+      let count =  mpTableView.numberOfRows(inSection: section)
+      if count !=  0 {
+         print("*****************")
+         print (count)
+      mpTableView.scrollToRow(at: IndexPath(row: 0, section: section ), at: .top, animated: true)
+      }
    }
 
    

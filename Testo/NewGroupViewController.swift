@@ -19,36 +19,21 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    var contacts = [CNContact]()
    var selectedSrings = [String]()
    
-
-   
    @IBOutlet weak var selectedCountLabel: UILabel!
-   
    @IBOutlet weak var newGroupNameTextfield: UITextField!
-   
    @IBOutlet weak var GroupNameLabel: UILabel!
+   @IBOutlet weak var newGroupTableView: UITableView!
    
    
    
    @IBAction func saveButton(_ sender: UIButton) {
       groupName = newGroupNameTextfield.text!
       let ids = getArrayofContactsID()
-     cModel.addContactToGroup(contactIdentifiers: ids, groupName: groupName)
-   
-   
-   
+      cModel.addContactToGroup(contactIdentifiers: ids, groupName: groupName)
    }// END Button
    
 
-   
-   @IBOutlet weak var newGroupTableView: UITableView!
-   
-   
-   
    //MARK: tableView func
-   
-   
-   
-   
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return contacts.count
    }
@@ -68,27 +53,27 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       }
       //email
       for email in contacts[indexPath.row].emailAddresses {
-          cell?.email.text = email.value as String
+         cell?.email.text = email.value as String
       }
       //photo
       if contacts[indexPath.row].imageDataAvailable {
          let image = UIImage(data: contacts[indexPath.row].imageData!)
          cell?.photo.image = image
+         
+         cell?.photo.layer.cornerRadius = 0.25
+         //cell?.photo.layer.borderWidth = 1.5
       }
       return cell!
    }//end of == tableView func
    
    //MARK: Select multiple rows and  put a check mark in the row
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
       print("selected  \(contacts[indexPath.row])")
-      
       if let cell = tableView.cellForRow(at: indexPath) {
          if cell.isSelected {
             cell.accessoryType = .checkmark
          }
       }
-      
       if let sr = tableView.indexPathsForSelectedRows {
          print("didDeselectRowAtIndexPath selected rows:\(sr)")
       }
@@ -96,17 +81,13 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    
    //MARK: UnSelect multiple rows and  take out the  check mark in the row
    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-      
       print("deselected  \(contacts[indexPath.row])")
-      
       if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
          cell.accessoryType = .none
       }
       
       if let sr = tableView.indexPathsForSelectedRows {
-         
          selectedCountLabel.text = sr.count as? String
-         
          print("didDeselectRowAtIndexPath selected rows:\(sr)")
       }
    }
@@ -128,7 +109,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       self.view.endEditing(true)
    }
-
+   
    
    
    //MARK: Alert
@@ -139,7 +120,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       self.present(alertController, animated: true, completion: nil)
       
    }
-
+   
    
    func autorization () {
       
@@ -152,7 +133,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       }
       
    }
-
+   
    func getArrayofContactsID () -> [String] {
       
       if let indexPaths = newGroupTableView.indexPathsForSelectedRows {
@@ -166,7 +147,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       }
       return selectedSrings
    }
-
+   
    
    
    

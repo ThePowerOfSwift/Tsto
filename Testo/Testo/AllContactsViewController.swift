@@ -12,10 +12,10 @@ import Contacts
 import ContactsUI
 
 
-struct ImageToDisplay {
-   
-   var imageName: String
-}
+//struct ImageToDisplay {
+//
+//   var imageName: String
+//}
 
 class AllContactsViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
    
@@ -87,10 +87,7 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      
-      print (contacts.count)
       return contacts.count
-      
    }
    
    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
@@ -103,14 +100,23 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    
    
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "allContactsCell", for: indexPath) as! allContactsCollectionViewCell
       
+      for phoneNumber in contacts[indexPath.item].phoneNumbers {
+         if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
+            let phoneNumberString = phoneNumberStruct.stringValue
+            cell.number = phoneNumberString
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            print(cell.number)
+         
+         }
+      }
    }
    
    
    // MARK: ViewDidLoad ----------------------------------------------------------------------------------------
    override func viewDidLoad() {
       super.viewDidLoad()
-      
       //     profileImageView.layer.cornerRadius = profileImageView.frame.height/2
       autorization()
       contacts = cModel.fetchContacts()
@@ -140,6 +146,16 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    
    
 }// @
+
+//extension AllContactsViewController : CellTextDelegate{
+//   
+//   
+//   func callButtonPressed(phNumber: String){
+//      
+//   }
+//
+//}
+
 
 
 

@@ -57,6 +57,7 @@ class GroupMenuViewController: UIViewController {
       setInfo()
       efect.layer.cornerRadius = 8
       efect.layer.borderWidth = 1.5
+      
    }//@
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,7 +65,8 @@ class GroupMenuViewController: UIViewController {
             destination.groupSelected = groupSelected
       }
    }
-
+   
+  
    
 //
    private func setInfo() {
