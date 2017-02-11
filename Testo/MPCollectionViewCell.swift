@@ -12,7 +12,6 @@ class MPCollectionViewCell: UICollectionViewCell {
    
    @IBOutlet weak var backgrown: UIView!
    
-   
    @IBOutlet weak var groupLabel: UILabel!
    
     

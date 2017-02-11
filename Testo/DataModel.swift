@@ -91,7 +91,7 @@ class DataModel {
    }
    
    
-   //MARK: search fro all contacts  only in all groups
+   //MARK: search for all contacts  only in all groups
    func searchForContactsInGroup() ->  [CNContact]{
       var contactsData = [CNContact]()
       let store = CNContactStore()
@@ -126,6 +126,49 @@ class DataModel {
       
       return contactsData
    }//END searchForContactsInGroup
+   
+   //MARK: get contacs in one group
+   func getContactsPerGroup(groupIdentifier: String ) ->  [CNContact]{
+      var contactsData = [CNContact]()
+      let store = CNContactStore()
+                  do {
+               let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
+               let keysToFetch = [CNContactGivenNameKey,
+                                  CNContactFamilyNameKey,
+                                  CNContactBirthdayKey,
+                                  CNContactOrganizationNameKey,
+                                  CNContactImageDataKey,
+                                  CNContactIdentifierKey,
+                                  CNContactThumbnailImageDataKey,
+                                  CNContactImageDataAvailableKey,
+                                  CNContactEmailAddressesKey,
+                                  CNContactPhoneNumbersKey]
+               let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+               contactsData += contact
+            } catch {
+               print(" fuck No \(groupIdentifier) group")
+            }
+      
+      
+      return contactsData
+   }//END searchForContactsInGroup
+   
+   
+   
+   func getPhonesInGroup(groupIdentifier: String ) ->  [CNContact]{
+      var contactsData = [CNContact]()
+      let store = CNContactStore()
+      do {
+         let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
+         let keysToFetch = [CNContactPhoneNumbersKey]
+         let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+         contactsData += contact
+      } catch {
+         print(" fuck No \(groupIdentifier) group")
+      }
+      
+      return contactsData
+   }
    
    
    

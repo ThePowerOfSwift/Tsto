@@ -19,6 +19,7 @@ class FrontPageViewController: UIViewController {
    var tvc : MPTableViewController!
    var cvc : MPCollectionViewController!
    var gvc : GroupMenuViewController!
+   var evc : EditGroupViewController!
    
    
    @IBAction func newGroup(_ sender: UIButton) {
@@ -74,7 +75,7 @@ class FrontPageViewController: UIViewController {
       case "toMenu" :
         let destination = segue.destination as? GroupMenuViewController
             destination?.groupSelected = groupSelected
-         
+        
       case "toTCV" :
          tvc = segue.destination as? MPTableViewController
          

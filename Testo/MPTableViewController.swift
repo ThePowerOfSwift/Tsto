@@ -36,10 +36,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    //MARK: TableView ----------------------------------------------------------------------------------
    func scrollToFirstRow(section: Int) {
       let indexPath = IndexPath(row: 0, section: 8)
-      self.mpTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)  //(indexPath, atScrollPosition: .Top, animated: true)
-      
-   
-      
+      self.mpTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
       
    }
    
@@ -99,7 +96,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
          }
          if mensallo.textMessageRecipients.count > 0 {
-         let messageComposeVC = mensallo.configuredMessageComposeViewController()// Obtain a configured MFMessageComposeViewController
+         let messageComposeVC = mensallo.configuredMessageComposeViewController(mesage: " ")// Obtain a configured MFMessageComposeViewController
             present(messageComposeVC, animated: true, completion: nil)// Present the configured MFMessageComposeViewController instance
          }
          
@@ -179,7 +176,7 @@ extension MPTableViewController : CellDelegate{
 
    internal func didSelectedSection(section: Int) {
       
-      mpTableView.scrollToRow(at: IndexPath(row: 0, section: section ), at: .top, animated: true)         
+      mpTableView.scrollToRow(at: IndexPath(row: 0, section: section ), at: .none, animated: true)
    }
 
    
