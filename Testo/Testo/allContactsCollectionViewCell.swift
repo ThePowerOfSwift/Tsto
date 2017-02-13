@@ -15,20 +15,18 @@ class allContactsCollectionViewCell: UICollectionViewCell {
    
    let cModel = DataModel.shared
    let mensallo = TextComposer()
-   
    var number = String ()
    
    @IBOutlet weak var name: UILabel!
    @IBOutlet weak var imageView: UIImageView!
-   
-   
    @IBOutlet weak var text: UIButton!
+   @IBOutlet weak var call: UIButton!
+   
    @IBAction func textButton(_ sender: Any) {
       if (mensallo.canSendText()) { // Make sure the device can send text messages
-         
          if  number != nil {
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            print(number)
+            print("%%%%%%%%%%%% SENDING A MESSEGE TO :   %%%%%%%%%%%%%%%%%%%")
+            print("THIS \(number)")
             mensallo.textMessageRecipients.append(number)
             let messageComposeVC = mensallo.configuredMessageComposeViewController(mesage: " ")
             let fromVC = AllContactsViewController()
@@ -40,36 +38,16 @@ class allContactsCollectionViewCell: UICollectionViewCell {
       }
    }//@text button
    
-   
-   
-   
-   
-   
-   
-   
-   @IBOutlet weak var call: UIButton!
    @IBAction func callButton(_ sender: UIButton) {
-      
-        var filteredString = String()
-      if  number != nil {
+         var filteredString = String()
+         if  number != nil {
          let numericSet = "0123456789"
          let filteredCharacters = number.characters.filter { return numericSet.contains(String($0))}
              filteredString = String(filteredCharacters)
          }
-   
       guard let number = URL(string: "telprompt://" + filteredString ) else { return }
       UIApplication.shared.open(number, options: [:], completionHandler: nil)
-
-      
    }//@
-   
-   
-   
-   
-   
-   
-   
-   
    
    
    override func prepareForReuse() {

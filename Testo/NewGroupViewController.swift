@@ -11,7 +11,7 @@ import Contacts
 import ContactsUI
 
 
-class NewGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
    
    var groupName = ""
    let cModel = DataModel.shared
@@ -110,14 +110,15 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       autorization()
       contacts = cModel.fetchContacts()
       newGroupTableView.reloadData()
-   
+      self.newGroupNameTextfield.delegate = self;
    }//@
    
-   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.view.endEditing(true)
-   }
+  
    
-
+   func textFieldReturn(_ textField: UITextField) -> Bool {
+      self.view.endEditing(true)
+      return false
+   }
    
    //MARK: Alert
    func alert(message: String) {

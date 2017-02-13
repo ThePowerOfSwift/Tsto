@@ -105,9 +105,11 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
          if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
             let phoneNumberString = phoneNumberStruct.stringValue
             cell.number = phoneNumberString
-          //  print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            print(cell.number)
-         
+            contactSelecteted = contacts[indexPath.item]
+            print("\n\n\n  1   -----CONTACT SELECTED PRESSED CELL ######################******")
+            print("\n\n\n ***** GROUP SELECTED ******")
+            print("CONTACT ID: \(contactSelecteted.givenName)")
+            print("CONTACT NAME: \(contactSelecteted.identifier)")
             self.performSegue(withIdentifier: "toAddContact", sender: self)
          }
       }
@@ -127,6 +129,10 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let destination = segue.destination as? AddContactViewController{
+         print("\n\n\n 2 -------###### PREPERE FOR SEGUE  ######################******")
+         print("\n\n\n ***** CONTACT SELECTED ******")
+         print("GroupNAME: \(contactSelecteted.givenName)")
+          print("GroupNAME: \(contactSelecteted.identifier)")
          destination.contactSelecteted = contactSelecteted
       }
    }

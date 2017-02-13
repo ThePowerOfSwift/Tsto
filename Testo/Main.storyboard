@@ -28,34 +28,34 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqu-BN-QX7">
-                                <rect key="frame" x="0.0" y="596" width="414" height="141"/>
+                                <rect key="frame" x="0.0" y="596" width="415" height="141"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="Dgl-dN-3r4" kind="embed" identifier="toCVV" id="0Vn-gi-rjz"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cxg-G7-ZJl">
-                                <rect key="frame" x="0.0" y="108" width="414" height="466"/>
+                                <rect key="frame" x="0.0" y="108" width="415" height="466"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="q4g-4H-ldJ" kind="embed" identifier="toTCV" id="vnI-c2-Z8Y"/>
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-2a-KJO">
-                                <rect key="frame" x="27" y="53" width="360" height="30"/>
+                                <rect key="frame" x="27" y="53" width="361" height="30"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XXU-RM-11W">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="30"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUi-Qz-QZz">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120.33333333333334" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="dBp-8d-X5o"/>
                                                     <constraint firstAttribute="height" constant="30" id="fnd-qh-KTE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="11"/>
-                                                <state key="normal" title="ADD GROUP" backgroundImage="button obal blue long  1">
+                                                <state key="normal" title="ADD GROUP" backgroundImage="blue sq fx">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -64,14 +64,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMX-Nj-kZG">
-                                                <rect key="frame" x="120" y="0.0" width="120" height="30"/>
+                                                <rect key="frame" x="120.33333333333333" y="0.0" width="120.33333333333336" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1iU-kD-o4A"/>
                                                     <constraint firstAttribute="width" constant="120" id="RC1-pO-8qd"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="11"/>
-                                                <state key="normal" title="ALL CONTACTS" backgroundImage="button obal blue long  1">
+                                                <state key="normal" title="ALL CONTACTS" backgroundImage="blue sq fx">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -79,14 +79,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBv-k0-AfE">
-                                                <rect key="frame" x="240" y="0.0" width="120" height="30"/>
+                                                <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333329" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Fvv-aD-ccG"/>
                                                     <constraint firstAttribute="width" constant="120" id="MY3-3a-o81"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="12"/>
-                                                <state key="normal" title="ABOUT US" backgroundImage="button obal blue long  1">
+                                                <state key="normal" title="ABOUT US" backgroundImage="blue sq fx">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -105,7 +105,7 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="COOL HEADER" translatesAutoresizingMaskIntoConstraints="NO" id="6Hs-ml-7wk">
-                                <rect key="frame" x="0.0" y="-1" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="-1" width="415" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tstö" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vi-de-wwE">
@@ -119,13 +119,13 @@
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
                             <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HEADERE" translatesAutoresizingMaskIntoConstraints="NO" id="5Y2-EE-gRP">
-                                <rect key="frame" x="0.0" y="87" width="414" height="25"/>
+                                <rect key="frame" x="0.0" y="87" width="415" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="4hg-hH-K7M"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTACTS IN GROUPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wd-BI-HYb">
-                                <rect key="frame" x="0.0" y="87" width="414" height="25"/>
+                                <rect key="frame" x="0.0" y="87" width="415" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -142,7 +142,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GROUPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-1W-Kle">
-                                <rect key="frame" x="1" y="572" width="412" height="31"/>
+                                <rect key="frame" x="1" y="572" width="413" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="aE9-eu-3B5"/>
@@ -221,21 +221,21 @@
                         <viewControllerLayoutGuide type="bottom" id="E5e-0E-BIR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oR4-jg-w4d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="466"/>
+                        <rect key="frame" x="0.0" y="0.0" width="415" height="466"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="78" sectionHeaderHeight="25" sectionFooterHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="nAP-B1-2QB">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="466"/>
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="466"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mpTableViewCell" rowHeight="78" id="kix-ky-c80" customClass="MPTableViewCell" customModule="Testo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="25" width="414" height="78"/>
+                                        <rect key="frame" x="0.0" y="25" width="415" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kix-ky-c80" id="crv-zT-k2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="415" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="glass thegraphics7" translatesAutoresizingMaskIntoConstraints="NO" id="sie-2c-2HS">
@@ -349,7 +349,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJv-OX-Q8W">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="157"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="glass thegraphics7" translatesAutoresizingMaskIntoConstraints="NO" id="dQE-af-5e3">
+                                                        <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="glass thegraphics7" translatesAutoresizingMaskIntoConstraints="NO" id="dQE-af-5e3">
                                                             <rect key="frame" x="0.0" y="97" width="167" height="29"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -359,7 +359,7 @@
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eSW-75-D4b">
                                                             <rect key="frame" x="0.0" y="0.0" width="172" height="126"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="126" id="u7F-si-28K"/>
                                                             </constraints>
@@ -490,7 +490,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="25"/>
-                                        <state key="normal" title="  GRID" image="Grid_000000_25" backgroundImage="button obal blue long  1"/>
+                                        <state key="normal" title="  GRID" image="Grid_000000_25" backgroundImage="blue sq fx"/>
                                         <connections>
                                             <action selector="gridButtonPressed" destination="RDS-Zb-gR6" eventType="touchUpInside" id="ZLg-R1-u9x"/>
                                         </connections>
@@ -499,7 +499,7 @@
                                         <rect key="frame" x="207" y="0.0" width="207" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="25"/>
-                                        <state key="normal" title="   LIST" image="List 2_000000_25" backgroundImage="button obal blue long  1">
+                                        <state key="normal" title="   LIST" image="List 2_000000_25" backgroundImage="blue sq fx">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -701,7 +701,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9b-Fh-fZC">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9b-Fh-fZC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" backgroundImage="glass thegraphics7"/>
@@ -720,7 +720,7 @@
                                 </constraints>
                                 <string key="text">With Tstö you can quickly separate your contacts into as many groups as you want. Then,  send an email or text message to everyone in a group privet or in a group chat with one tap.
 It's great for getting directly to how you want to communicate.                                                                         </string>
-                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -730,7 +730,7 @@ It's great for getting directly to how you want to communicate.                 
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="tTe-WS-hH3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -740,22 +740,28 @@ It's great for getting directly to how you want to communicate.                 
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="b6X-aS-ppv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Tstö " translatesAutoresizingMaskIntoConstraints="NO" id="z9j-p7-dNZ">
+                                <rect key="frame" x="163" y="177" width="88" height="89"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="BGp-sd-xmU" secondAttribute="trailing" constant="41" id="15q-uH-s2x"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nux-Eb-IBR" secondAttribute="trailing" constant="21" id="2id-es-h2Q"/>
+                            <constraint firstItem="z9j-p7-dNZ" firstAttribute="leading" secondItem="lZw-Yo-Fd5" secondAttribute="leadingMargin" constant="143" id="3nO-fl-vg2"/>
                             <constraint firstItem="sfJ-CI-A8f" firstAttribute="top" secondItem="LZy-SN-6oe" secondAttribute="bottom" constant="148" id="By2-ef-oCB"/>
                             <constraint firstItem="LZy-SN-6oe" firstAttribute="leading" secondItem="lZw-Yo-Fd5" secondAttribute="leadingMargin" constant="42" id="F3v-3E-r9P"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LZy-SN-6oe" secondAttribute="trailing" constant="41" id="Hv1-oH-zgl"/>
                             <constraint firstItem="0Ol-e1-7De" firstAttribute="top" secondItem="m9b-Fh-fZC" secondAttribute="bottom" id="I0q-FM-uSH"/>
                             <constraint firstItem="BGp-sd-xmU" firstAttribute="leading" secondItem="lZw-Yo-Fd5" secondAttribute="leadingMargin" constant="42" id="Jhf-IZ-67X"/>
+                            <constraint firstItem="z9j-p7-dNZ" firstAttribute="top" secondItem="WOJ-RG-dZH" secondAttribute="bottom" constant="157" id="N4T-69-lXf"/>
                             <constraint firstItem="Nux-Eb-IBR" firstAttribute="top" secondItem="WOJ-RG-dZH" secondAttribute="bottom" constant="121" id="N5E-Rq-WGy"/>
                             <constraint firstItem="m9b-Fh-fZC" firstAttribute="top" secondItem="lZw-Yo-Fd5" secondAttribute="top" id="PhJ-EC-TG4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z9j-p7-dNZ" secondAttribute="trailing" constant="143" id="PlZ-Yn-DeT"/>
                             <constraint firstItem="0Ol-e1-7De" firstAttribute="top" secondItem="Nux-Eb-IBR" secondAttribute="bottom" constant="171" id="Svt-46-Lyq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sfJ-CI-A8f" secondAttribute="trailing" constant="41" id="eG8-PR-rPZ"/>
                             <constraint firstItem="m9b-Fh-fZC" firstAttribute="leading" secondItem="lZw-Yo-Fd5" secondAttribute="leading" id="g4l-g3-7fb"/>
@@ -783,10 +789,10 @@ It's great for getting directly to how you want to communicate.                 
                         <viewControllerLayoutGuide type="bottom" id="esv-qD-DkX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4Cr-0O-t0z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
+                        <rect key="frame" x="0.0" y="0.0" width="415" height="141"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0m-8Y-HZd">
+                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0m-8Y-HZd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1318,7 +1324,7 @@ It's great for getting directly to how you want to communicate.                 
                                 </constraints>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editVCCell" editingAccessoryType="disclosureIndicator" rowHeight="104" id="9Ph-yA-ucQ" customClass="EditTableViewCell" customModule="Testo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editVCCell" rowHeight="104" id="9Ph-yA-ucQ" customClass="EditTableViewCell" customModule="Testo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ph-yA-ucQ" id="X0X-4S-qos">
@@ -1447,8 +1453,10 @@ It's great for getting directly to how you want to communicate.                 
         <image name="Grid_000000_25" width="25" height="25"/>
         <image name="HEADERE" width="900" height="300"/>
         <image name="List 2_000000_25" width="25" height="25"/>
+        <image name="Tstö " width="300" height="300"/>
         <image name="backgrown multicolor " width="570" height="763"/>
         <image name="backgrown origami-interface" width="720" height="1280"/>
+        <image name="blue sq fx" width="150" height="75"/>
         <image name="button clollection vioew D" width="900" height="300"/>
         <image name="button obal blue long  1" width="600" height="192"/>
         <image name="button web white fixed" width="300" height="60"/>
@@ -1459,6 +1467,6 @@ It's great for getting directly to how you want to communicate.                 
         <image name="watercolorsplash" width="800" height="800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LTk-FT-Yvq"/>
+        <segue reference="IIA-qW-0Sq"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -73,6 +73,16 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    }
    
    
+   
+   override func viewWillDisappear(_ animated: Bool) {
+      
+      if self.isBeingDismissed || self.isMovingFromParentViewController {
+      }
+      
+   }
+   
+   
+   
    func refreshContacts() {
       print("REFRESHING CONTACTS")
       DispatchQueue.main.async{

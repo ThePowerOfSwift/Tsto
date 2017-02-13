@@ -41,7 +41,14 @@ class AddContactViewController: UIViewController,UITableViewDelegate, UITableVie
    
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      addContactToGroup(contactIdentifier: contactID, groupName:  groups[indexPath.row].name )
+       print("\n\n\n  3 ------####### GROUP CELL PRESED ######################******")
+      print("\n\n\n ***** GROUP SELECTED ******")
+      print("GroupNAME: \(groups[indexPath.row].name)")
+      print("GroupInfo: \(groups[indexPath.row].identifier)")
+      print("\n\n\n *****  CELL PRINT CONTACT TO BE ADDED ******")
+      print("Contact Identifier: \(contactSelecteted.identifier)")
+      print("Contact NAME: \(contactSelecteted.givenName)")
+      cModel.addContactToGroup(contactIdentifier: contactSelecteted.identifier, groupID:  groups[indexPath.row].identifier )
       dismiss(animated: true, completion: nil)
    }
 
@@ -53,7 +60,21 @@ class AddContactViewController: UIViewController,UITableViewDelegate, UITableVie
       efect.layer.cornerRadius = 8
       efect.layer.borderWidth = 1.5
       contactID = contactSelecteted.identifier
+      print("\n\n\n^^^^^^^  VIEW DID LOAD RECIVE ---- CONTACT SELCTED  ^^^^^^^^^******")
+      print("Contact ID: \(contactSelecteted.identifier)")
+      print("Contact NAME: \(contactSelecteted.givenName)")
+      tableView.reloadData()
+      NotificationCenter.default.addObserver(self, selector: #selector(MPCollectionViewController.refreshContacts), name: NSNotification.Name(rawValue: "CNContactStoreDidChangeNotification"), object: nil)
+      
    }//@
+   
+   func refreshContacts() {
+      print("REFRESHING CONTACTS")
+      DispatchQueue.main.async{
+         self.tableView.reloadData()
+      }
+   }
+   
    
    func getGRoups() -> [CNGroup] {
       let store = CNContactStore()
@@ -68,25 +89,6 @@ class AddContactViewController: UIViewController,UITableViewDelegate, UITableVie
 
    
    
-   func addContactToGroup(contactIdentifier: String, groupName: String) {
-      // creatGroup
-      let store = CNContactStore()
-      var cotacto = CNContact()
-      let groupTo = CNMutableGroup ()
-      var grupo = CNGroup()
-      groupTo.name = groupName
-      grupo = groupTo
-         do { let keysToFetch = [CNContactIdentifierKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
-            cotacto = try store.unifiedContact(withIdentifier: contactIdentifier, keysToFetch: keysToFetch as! [CNKeyDescriptor])
-         } catch let error{ print(error)}
-            let saveRequest2 = CNSaveRequest()
-            saveRequest2.addMember(cotacto, to: grupo)
-         do {  try store.execute(saveRequest2)
-         } catch let error{
-            print(error)
-         }
-         
-      }
    
 
    func autorization () {

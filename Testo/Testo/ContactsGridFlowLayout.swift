@@ -37,12 +37,12 @@ class ContactsGridFlowLayout: UICollectionViewFlowLayout {
    }
    
    override var itemSize: CGSize {
-      set {
+         set {
          self.itemSize = CGSize(width: itemWidth(), height: itemHeight)
-      }
-      get {
+         }
+         get {
          return CGSize(width: itemWidth(), height: itemHeight)
-      }
+         }
    }
    
    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
