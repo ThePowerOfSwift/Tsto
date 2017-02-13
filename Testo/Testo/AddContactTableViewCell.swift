@@ -10,6 +10,7 @@ import UIKit
 
 class AddContactTableViewCell: UITableViewCell {
    
+   @IBOutlet weak var name: UILabel!
    
 
     override func awakeFromNib() {

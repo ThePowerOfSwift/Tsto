@@ -12,10 +12,6 @@ import Contacts
 import ContactsUI
 
 
-//struct ImageToDisplay {
-//
-//   var imageName: String
-//}
 
 class AllContactsViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
    
@@ -23,10 +19,10 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    let cModel = DataModel.shared
    var mensallo = TextComposer()
    var contacts: [CNContact] = []
-   let gridFlowLayout = ContactsGridFlowLayout()/// Flow layout that displays cells with a Grid layout
-   let listFlowLayout = ContactsListFlowLayout()/// Flow layout that displays cells with a List layout, like in a tableView
-   
-   /// True if the current flow layout is a grid
+   let gridFlowLayout = ContactsGridFlowLayout()
+   let listFlowLayout = ContactsListFlowLayout()
+   var contactSelecteted = CNContact()
+
    var isGridFlowLayoutUsed: Bool = false {
       didSet {
          listButton.alpha = (isGridFlowLayoutUsed == true) ? 0.9 : 1.0
@@ -40,11 +36,14 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
    @IBOutlet weak var collectionView: UICollectionView!
    @IBOutlet weak var profileTitleLabel: UILabel!
    @IBOutlet var detailLabel: UILabel!
-   // @IBOutlet var profileImageView: UIImageView!
+
    @IBOutlet var headerView: UIView!
    @IBOutlet var gridButton: UIButton!
    @IBOutlet var listButton: UIButton!
    
+   @IBAction func back(_ sender: UIButton) {
+       dismiss(animated: true, completion: nil)
+   }
    
    //MARK: change to list layout
    @IBAction func listButtonPressed() {
@@ -106,9 +105,10 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
          if let phoneNumberStruct = phoneNumber.value as? CNPhoneNumber {
             let phoneNumberString = phoneNumberStruct.stringValue
             cell.number = phoneNumberString
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+          //  print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             print(cell.number)
          
+            self.performSegue(withIdentifier: "toAddContact", sender: self)
          }
       }
    }
@@ -125,7 +125,12 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
       collectionView.reloadData()
    }
    
-   
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if let destination = segue.destination as? AddContactViewController{
+         destination.contactSelecteted = contactSelecteted
+      }
+   }
+
    
    
    //MARK: Autorization
@@ -134,8 +139,8 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
       if status == .authorized {
          collectionView.reloadData()
       } else if status == .denied {
-         let alert = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
-         present(alert, animated: true, completion: nil)
+         let alertControllor = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
+         present(alertControllor, animated: true, completion: nil)
       }
       
    }

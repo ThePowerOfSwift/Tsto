@@ -30,6 +30,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       groupName = newGroupNameTextfield.text!
       let ids = getArrayofContactsID()
       cModel.addContactToGroup(contactIdentifiers: ids, groupName: groupName)
+      dismiss(animated: true, completion: nil)
    }// END Button
    
 
@@ -59,8 +60,10 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       if contacts[indexPath.row].imageDataAvailable {
          let image = UIImage(data: contacts[indexPath.row].imageData!)
          cell?.photo.image = image
-         
-         cell?.photo.layer.cornerRadius = 0.25
+         cell?.photo.layer.cornerRadius = (cell?.photo.frame.size.width)! / 2;
+         cell?.photo.clipsToBounds = true
+//
+//         cell?.photo.layer.cornerRadius = 0.25
          //cell?.photo.layer.borderWidth = 1.5
       }
       return cell!
@@ -75,6 +78,7 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
          }
       }
       if let sr = tableView.indexPathsForSelectedRows {
+         selectedCountLabel.text = String (sr.count)
          print("didDeselectRowAtIndexPath selected rows:\(sr)")
       }
    }
@@ -85,7 +89,6 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
          cell.accessoryType = .none
       }
-      
       if let sr = tableView.indexPathsForSelectedRows {
          selectedCountLabel.text = sr.count as? String
          print("didDeselectRowAtIndexPath selected rows:\(sr)")
@@ -94,7 +97,11 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    
    
    
-   
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      
+      textField.resignFirstResponder()
+      return true
+   }
    
    //MARK: ViewDidLad ---------------------------------------------------------------------------------------------------------
    override func viewDidLoad() {
@@ -103,14 +110,14 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       autorization()
       contacts = cModel.fetchContacts()
       newGroupTableView.reloadData()
-      
+   
    }//@
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       self.view.endEditing(true)
    }
    
-   
+
    
    //MARK: Alert
    func alert(message: String) {
@@ -128,8 +135,10 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       if status == .authorized {
          newGroupTableView.reloadData()
       } else if status == .denied {
-         let alert = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
-         present(alert, animated: true, completion: nil)
+         let alertController = UIAlertController(title: "Oops!", message: "the acces has been denay,please go to your setting to allow access ", preferredStyle: UIAlertControllerStyle.alert)
+         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+         alertController.addAction(defaultAction)
+         self.present(alertController, animated: true, completion: nil)
       }
       
    }
@@ -142,8 +151,10 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
             selectedSrings.append(contactID)
          }
       } else {
-         let alert = UIAlertController(title: "Oops!", message: "there is no contacts selected ", preferredStyle: UIAlertControllerStyle.alert)
-         present(alert, animated: true, completion: nil)
+         let alertController = UIAlertController(title: "Oops!", message: "there is no contacts selected ", preferredStyle: UIAlertControllerStyle.alert)
+         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+         alertController.addAction(defaultAction)
+         self.present(alertController, animated: true, completion: nil)
       }
       return selectedSrings
    }

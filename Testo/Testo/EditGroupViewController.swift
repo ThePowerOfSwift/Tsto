@@ -17,8 +17,8 @@ class EditGroupViewController: UIViewController, UITableViewDelegate, UITableVie
    
    var groupSelected: GroupSelected!
    let cModel = DataModel.shared
-   var groupData = [CNContact]()
-   var groupInfo = String ()
+   var contactsInGroup = [CNContact]()
+   var groupIdetidentifier = String ()
    
    
    @IBOutlet weak var tableView: UITableView!
@@ -30,7 +30,10 @@ class EditGroupViewController: UIViewController, UITableViewDelegate, UITableVie
    }
    
    @IBAction func deleteButton(_ sender: UIButton) {
-      
+      print("\n\n\n ***** THIS GROUP TO BE DELETE ******")
+      print ("group name:\(groupIdetidentifier)")
+      cModel.deleteingCNGroup(groupID: groupIdetidentifier)
+      dismiss(animated: true, completion: nil)
 
    }
   
@@ -38,32 +41,49 @@ class EditGroupViewController: UIViewController, UITableViewDelegate, UITableVie
    
    //MARK: COllection View
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return groupData.count
+      return contactsInGroup.count
    }
    
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
       let cell = tableView.dequeueReusableCell(withIdentifier: "editVCCell", for: indexPath) as! EditTableViewCell
-      let fullname = "\(groupData[indexPath.row].givenName)  \(groupData[indexPath.row].familyName)"
+      let fullname = "\(contactsInGroup[indexPath.row].givenName)  \(contactsInGroup[indexPath.row].familyName)"
          cell.name.text = fullname
-      if groupData[indexPath.row].imageDataAvailable {
-         let image = UIImage(data: groupData[indexPath.row].imageData!)
+      if contactsInGroup[indexPath.row].imageDataAvailable {
+         let image = UIImage(data: contactsInGroup[indexPath.row].imageData!)
          cell.photo.image = image
          cell.photo.layer.cornerRadius = 8
          cell.photo.layer.borderWidth = 1.5
       }
       return cell
    }//@
+
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+         print("\n\n\n ***** CONTACT IN GROUP ******")
+         print("GroupInfo: \(groupIdetidentifier)")
+         print("\n\n\n ***** CONTACT TO BE REMOVE ******")
+         print("Contact Identifier: \(contactsInGroup[indexPath.row].identifier)")
+         print("Contact Identifier: \(contactsInGroup[indexPath.row].givenName)")
+
+         cModel.deleteCNContactFromCNGroup(contactIdentifier: contactsInGroup[indexPath.row].identifier , groupID: groupIdetidentifier )
+         // deleting contact from group
+      }
+   }
    
    
+   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      self.view.endEditing(true)
+   }
+
    
    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         autorization()
-        groupInfo =  groupSelected.idetifier
+        groupIdetidentifier =  groupSelected.idetifier
         groupName.text = groupSelected.name
-        groupData = cModel.getContactsPerGroup(groupIdentifier: groupInfo)
+        contactsInGroup = cModel.getContactsPerGroup(groupIdentifier: groupIdetidentifier)
         tableView.reloadData()
    }//@
 
@@ -79,6 +99,7 @@ class EditGroupViewController: UIViewController, UITableViewDelegate, UITableVie
    }
 
    
-
+   
+   
    
 }//@ EditGroupViewController

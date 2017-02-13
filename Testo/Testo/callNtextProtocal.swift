@@ -10,7 +10,7 @@ import Foundation
 protocol CellTextDelegate : NSObjectProtocol {
    
    
-   func callTextButtonPressed(phNumber: String)
+   func callTextButtonPressed(yesOrNo: Bool)
 
    
 }

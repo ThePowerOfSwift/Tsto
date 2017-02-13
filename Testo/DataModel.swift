@@ -148,8 +148,6 @@ class DataModel {
       } catch {
          print(" fuck No \(groupIdentifier) group")
       }
-      
-      
       return contactsData
    }//END searchForContactsInGroup
    
@@ -173,25 +171,23 @@ class DataModel {
    
    
    func groupContactCount (groupIdentifier: String ) ->  Int{
-   var contactsData = [CNContact]()
-   let store = CNContactStore()
-   do {
-   let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
-   let keysToFetch = [CNContactPhoneNumbersKey]
-   let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
-   contactsData += contact
-   } catch {
-   print(" fuck No \(groupIdentifier) group")
-   }
-   
-   return contactsData.count
+      var contactsData = [CNContact]()
+      let store = CNContactStore()
+         do {
+            let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groupIdentifier)
+            let keysToFetch = [CNContactPhoneNumbersKey]
+            let contact = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+            contactsData += contact
+         } catch {
+               print(" fuck No \(groupIdentifier) group")
+       }
+      return contactsData.count
    }
 
    
    
    //MARK: getGroupsId
    func getGroupsId() -> [String] {
-      
       let store = CNContactStore()
       var allGroupsID = [String]()
       var allGroups = [CNGroup]()
@@ -214,8 +210,7 @@ class DataModel {
    func getContactsByGroup() ->  [[CNContact]]{
       var contactsData = [[CNContact]]()
       let store = CNContactStore()
-      var allGroups = getGroupsId()
-      var addding = [CNContact]()
+      let allGroups = getGroupsId()
       for group in allGroups {
          do {
             let predicate = CNContact.predicateForContactsInGroup(withIdentifier: group)
@@ -245,11 +240,11 @@ class DataModel {
    //MARk: Create a new Group
    func addCNGroup (groupName: String) {
       let contactsStore = CNContactStore()
-      var newGroup = CNMutableGroup()
-      var saveReq = CNSaveRequest()
+      let newGroup = CNMutableGroup()
+      let saveReq = CNSaveRequest()
       newGroup.name = groupName
       saveReq.add(newGroup, toContainerWithIdentifier: nil)
-      let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+      _ = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
       do { try contactsStore.execute(saveReq)
          print ("saved")}
       catch { print("error") }
@@ -263,14 +258,14 @@ class DataModel {
       let store = CNContactStore()
       var cotacto = CNContact()
       var grupo = CNGroup()
-      var newGroup = CNMutableGroup()
+      let newGroup = CNMutableGroup()
       let saveRequest1 = CNSaveRequest()
       newGroup.name = groupName
       grupo = newGroup
       saveRequest1.add(newGroup, toContainerWithIdentifier: nil)
       do { try store.execute(saveRequest1)
          print ("saved")
-      } catch {  let error = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+      } catch {  _ = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
          print("error") }
       //Add contacts to group
       for id in contactIdentifiers  {
@@ -280,6 +275,10 @@ class DataModel {
          } catch let error{ print(error)}
          let saveRequest2 = CNSaveRequest()
          saveRequest2.addMember(cotacto, to: grupo)
+         // add contact to group
+         print("\n\n\n ***** ADDING CONTACT ******")
+          print("\n\n\n ***** \(cotacto) ******")
+         
          do{
             try store.execute(saveRequest2)
          } catch let error{
@@ -309,10 +308,176 @@ class DataModel {
    }//@getGroupsNames
    
    
+   //MARK: DElete group
+   func deleteGroup(group: String) {
+      let store = CNContactStore()
+      let groupTo = CNMutableGroup ()
+      groupTo.name = group
+      print (groupTo.name)
+      let saveRequest2 = CNSaveRequest()
+      saveRequest2.delete(groupTo)
+      do {  try store.execute(saveRequest2)
+      } catch let error{
+         print(error)
+      }
+      
+   }
+   
+   //MARK: deleting Group uppdated
+   func deleteingCNGroup (groupID: String) {
+      let store = CNContactStore()
+      let saveReq = CNSaveRequest()
+      var allGroups = [CNGroup]()
+      var fetchGroup = CNGroup()
+   
+      do {
+         allGroups = try store.groups(matching: nil)
+         for groupx in allGroups {
+            if groupx.identifier == groupID {
+               fetchGroup = groupx
+             }
+          }
+               print("\n\n\n ***** GROUP TO DELETE ******")
+               print ("group name:\(fetchGroup.name)")
+               print ("group name:\(fetchGroup.identifier)")
+             saveReq.delete(fetchGroup.mutableCopy() as! CNMutableGroup )
+          do { try store.execute(saveReq)
+             print ("--------DELATED \(fetchGroup.name) DELETED-")}
+         catch { _ = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+            print("error")
+         }
+      }
+      catch {
+         print("Handle error")
+      }
+      
+      
+   }//@
+
+   
+   func deleteCNContactFromCNGroup(contactIdentifier: String, groupID: String ) {
+      // creatGroup
+      let store = CNContactStore()
+      var cotacto = CNContact()
+      var allGroups = [CNGroup]()
+      var fetchGroup = CNGroup()
+      do {
+         allGroups = try store.groups(matching: nil)
+         for groupx in allGroups {
+            if groupx.identifier == groupID {
+               fetchGroup = groupx
+                print("\n\n\n ***** CONTACT IN GROUP ******")
+                print (" group to name:\(groupx.name)")
+               print (" group to ID:\(groupx.identifier)")
+            }
+         }
+      } catch { _ = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
+            print("error")
+         }
+      
+      do {
+         let keysToFetch = [CNContactIdentifierKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataAvailableKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
+         cotacto = try store.unifiedContact(withIdentifier: contactIdentifier, keysToFetch: keysToFetch as! [CNKeyDescriptor])
+      } catch let error{ print(error)}
+      print("\n\n\n ***** REMOVING CONTACT ******")
+       print (" Contact identifier \(cotacto.identifier)---------")
+      print ("  C ontact name  \(cotacto.givenName)---------")
+      let saveRequest2 = CNSaveRequest()
+      saveRequest2.removeMember(cotacto, from: fetchGroup)
+      do {  try store.execute(saveRequest2)
+         print("\n\n\n ***** CONTACT DELETED ******")
+          print ("--------Deleted \(cotacto.identifier)--DELETED-------")
+      } catch let error{
+         print(error)
+      }
+      
+   }//@
+
    
    
    
+   func addContactToGroup(contactIdentifier: String, groupName: String) {
+      // creatGroup
+      let store = CNContactStore()
+      var cotacto = CNContact()
+      let groupTo = CNMutableGroup ()
+      var grupo = CNGroup()
+      groupTo.name = groupName
+      grupo = groupTo
+      do { let keysToFetch = [CNContactIdentifierKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
+         cotacto = try store.unifiedContact(withIdentifier: contactIdentifier, keysToFetch: keysToFetch as! [CNKeyDescriptor])
+      } catch let error{ print(error)}
+      let saveRequest2 = CNSaveRequest()
+      saveRequest2.addMember(cotacto, to: grupo)
+      do {  try store.execute(saveRequest2)
+      } catch let error{
+         print(error)
+      }
+      
+   }
    
+
    
-   
+   //MARK: fetch catche and mash
+//
+//   func matchingContacts(notMatch: (() -> Void)?) {
+//      getContacts { (contacts, error) in
+//         if error == nil {
+//            debugPrint("contacts count", contacts.count)
+//            self.getContactsDictionaryFromCache(contacts, notMatch: {
+//               notMatch?()
+//            })
+//         }
+//      }
+//   }
+//   
+//   private func getContactsDictionaryFromCache(_ contacts: [CNContact], notMatch: (() -> Void)?) {
+//      var isMatching = true
+//      for contact in contacts {
+//         let key = contact.identifier
+//         
+//         do {
+//            let cachex = try  NSCache<NSDictionary>(name: "Contacts")
+//            if let contactDictionary = cachex[key] {
+//               if !contactDictionary.isEqual(to: contact.dictionary) {
+//                  debugPrint("contactDictionary not matching")
+//                  isMatching = false
+//               }
+//            } else {
+//               debugPrint("contactDictionary isn't here")
+//               isMatching = false
+//            }
+//         } catch {
+//            debugPrint(error.localizedDescription)
+//            isMatching = false
+//         }
+//      }
+//      
+//      if !isMatching {
+//         notMatch?()
+//      }
+//      
+//      cacheContacts(contacts)
+//   }
+//   
+//   private func cacheContacts(_ contacts: [CNContact]) {
+//      for contact in contacts {
+//         let contactDictionary = CNContact() as? NSDictionary
+//         let key = contact.identifier
+//         
+//         do {
+//            let cache = try NSCache<NSDictionary>(name: "Contacts")
+//            cache[key] = contactDictionary
+//         } catch {
+//            debugPrint(error.localizedDescription)
+//         }
+//      }
+//   }
+//   
+//   
+//   
+//   
+//   
+//   
+//   
 }//end of Info Class

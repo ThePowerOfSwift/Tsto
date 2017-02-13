@@ -10,9 +10,15 @@ import UIKit
 
 class MPCollectionViewCell: UICollectionViewCell {
    
-   @IBOutlet weak var backgrown: UIView!
    
    @IBOutlet weak var groupLabel: UILabel!
+   
+   override func prepareForReuse() {
+      super.prepareForReuse()
+      groupLabel.text = nil
+   }
+   
+
    
     
 }

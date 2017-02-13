@@ -22,13 +22,9 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    var selected = ""
    weak var delageta : CellDelegate?
    
-   
    @IBOutlet weak var collectionView: UICollectionView!
    
-   
-   
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      print(groupsNames.count)
       return groups.count
    }
    
@@ -45,6 +41,7 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       let frontPageVC = self.parent as! FrontPageViewController
       frontPageVC.groupSelected = GroupSelected(name: groups[indexPath.item].name, idetifier: groups[indexPath.item].identifier)
       frontPageVC.performSegue(withIdentifier: "toMenu", sender: groups[indexPath.row])
+      
    }
    
    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -53,20 +50,38 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       visibleRect.size = collectionView.bounds.size
       let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
       let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
-      print ("#############################")
-      print(visibleIndexPath.section)
+      print ("@@@ COLLLECTION VIEW VISIBLE CELL  ##########")
+      print("INDEXPHAT \(visibleIndexPath.section)")
       delageta?.didSelectedSection(section: visibleIndexPath.item)
       
    }
-   
    
    
    //MARK: ViewDidLoad ------------------------------------------------------------------------------------------------
    override func viewDidLoad() {
       super.viewDidLoad()
       autorization()
+      NotificationCenter.default.addObserver(self, selector: #selector(MPCollectionViewController.refreshContacts), name: NSNotification.Name(rawValue: "CNContactStoreDidChangeNotification"), object: nil)
+      
+   }//@
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
       groups = getGRoups()
       collectionView.reloadData()
+      collectionViewCellLayout()
+   }
+   
+   
+   func refreshContacts() {
+      print("REFRESHING CONTACTS")
+      DispatchQueue.main.async{
+      self.collectionView.reloadData()
+      }
+   }
+
+   func collectionViewCellLayout () {
+      
       let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
       let width = UIScreen.main.bounds.width
       layout.itemSize = CGSize(width: width, height: 130)
@@ -75,14 +90,11 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       layout.minimumLineSpacing = 0
       layout.scrollDirection = .horizontal
       collectionView?.collectionViewLayout = layout
-   }//@
-   
-   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      collectionView.reloadData()
+  
+      
+      
+      
    }
-   
-   
    
    func getGRoups() -> [CNGroup] {
       let store = CNContactStore()
@@ -106,8 +118,6 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    }//@
    
    
-   
-   
    func autorization () {
       let status = CNContactStore.authorizationStatus(for: .contacts)
       if status == .authorized {
@@ -119,14 +129,17 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
       
    }
    
-}//END of MPCollectionViewController
+   }//END of MPCollectionViewController
 
-extension MPCollectionViewController : CellDelegate {
-   internal func didSelectedSection(section: Int) {
-      let idetifair = groups[section].identifier
-      let count =  cModel.groupContactCount(groupIdentifier: idetifair)
-      if section <=  count {
+   extension MPCollectionViewController : CellDelegate {
+      internal func didSelectedSection(section: Int) {
+         let idetifair = groups[section].identifier
+         let count =  cModel.groupContactCount(groupIdentifier: idetifair)
+         print("****** MOVE TO SECTION   ***********")
+         print ("COUNT \(count)")
+         print ("NAME \(groups[section].name)")
+         if count <=   section {
          collectionView.scrollToItem(at: IndexPath(row: section , section: 0 ), at: .top, animated: true)
-    }
-   }
+         }
+      }
 }//@extension
