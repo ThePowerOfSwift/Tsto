@@ -61,6 +61,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
          let image = UIImage(data: groupX[indexPath.row].imageData!)
          cell?.photo.image = image
       }
+      cell?.selectionStyle = .none
       return cell!
    }//@
    
@@ -90,7 +91,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    // MARK: swipt  to add to Call funcionality
    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-      let call = UITableViewRowAction(style: .default, title: "CAll") { (action, indexPath) in
+      let call = UITableViewRowAction(style: .default, title: "   CAll   ") { (action, indexPath) in
          
          
          let groupX = self.contactsLookup[indexPath.section]
@@ -109,7 +110,7 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
          }
       }
-      call.backgroundColor = UIColor.green
+      call.backgroundColor = UIColor.orange
       return [call]
    }//@
    //@ TableView  Funcs -------------------------------------------------------------------------------------------------------
@@ -120,17 +121,20 @@ class MPTableViewController: UIViewController, UITableViewDelegate, UITableViewD
       super.viewDidLoad()
       autorization()
       contactsLookup = cModel.getContactsByGroup()
-      print (contactsLookup)
       groupNames  = cModel.getGroupsNames()
-      contactsLookup = cModel.getContactsByGroup()
+      //contactsLookup = cModel.getContactsByGroup()
       mpTableView.reloadData()
       
-      NotificationCenter.default.addObserver(self, selector: #selector(MPCollectionViewController.refreshContacts), name: NSNotification.Name(rawValue: "CNContactStoreDidChangeNotification"), object: nil)
+      
+      
+      NotificationCenter.default.addObserver(self, selector: #selector(refreshContacts), name: NSNotification.Name.CNContactStoreDidChange, object: nil)
       
    }
    func refreshContacts() {
-      print("REFRESHING CONTACTS")
+      print("####  REFRESHING CONTACTS  ####")
       DispatchQueue.main.async{
+          self.groupNames  = self.cModel.getGroupsNames()
+         self.contactsLookup = self.cModel.getContactsByGroup()
          self.mpTableView.reloadData()
       }
    }
@@ -156,7 +160,7 @@ extension MPTableViewController : CellDelegate{
    internal func didSelectedSection(section: Int) {
       let count =  mpTableView.numberOfRows(inSection: section)
       if count > 1 {
-         print("******NUMBER OF ROW3S IN SECTION ROW ***********")
+         print("******NUMBER OF ROWS IN SECTION ROW ***********")
          print ("ROWS \(count)")
          mpTableView.scrollToRow(at: IndexPath(row: 1, section: section ), at: .top, animated: true)
       }

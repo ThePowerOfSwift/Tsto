@@ -48,7 +48,7 @@ class AddContactViewController: UIViewController,UITableViewDelegate, UITableVie
       print("\n\n\n *****  CELL PRINT CONTACT TO BE ADDED ******")
       print("Contact Identifier: \(contactSelecteted.identifier)")
       print("Contact NAME: \(contactSelecteted.givenName)")
-      cModel.addContactToGroup(contactIdentifier: contactSelecteted.identifier, groupID:  groups[indexPath.row].identifier )
+      cModel.addONEContactToGroup(contactIdentifier: contactSelecteted.identifier, groupID:  groups[indexPath.row].identifier )
       dismiss(animated: true, completion: nil)
    }
 

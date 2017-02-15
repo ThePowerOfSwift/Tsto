@@ -11,6 +11,7 @@ import Foundation
 import Firebase
 import Contacts
 import ContactsUI
+import AudioUnit
 
 class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
    
@@ -40,6 +41,9 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let frontPageVC = self.parent as! FrontPageViewController
       frontPageVC.groupSelected = GroupSelected(name: groups[indexPath.item].name, idetifier: groups[indexPath.item].identifier)
+      
+      AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+      AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
       frontPageVC.performSegue(withIdentifier: "toMenu", sender: groups[indexPath.row])
       
    }
@@ -61,8 +65,7 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    override func viewDidLoad() {
       super.viewDidLoad()
       autorization()
-      NotificationCenter.default.addObserver(self, selector: #selector(MPCollectionViewController.refreshContacts), name: NSNotification.Name(rawValue: "CNContactStoreDidChangeNotification"), object: nil)
-      
+      NotificationCenter.default.addObserver(self, selector: #selector(MPCollectionViewController.refreshContacts),name: NSNotification.Name.CNContactStoreDidChange, object: nil)
    }//@
    
    override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +87,9 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
    
    
    func refreshContacts() {
-      print("REFRESHING CONTACTS")
+      print("#####  REFRESHING CONTACTS #######")
       DispatchQueue.main.async{
+         self.groups = self.getGRoups()
       self.collectionView.reloadData()
       }
    }
@@ -115,10 +119,6 @@ class MPCollectionViewController: UIViewController, UICollectionViewDelegate, UI
             var groupsId = [String]()
             groupsId.append(groupx.identifier)
             groupsNames.append(groupx.name)
-            print ("-------------------------------------------------------------------------")
-            print (groupx.name)
-            print (groupsNames.count)
-            print (groupsId.count)
             groups = allGroups
          }
       } catch {

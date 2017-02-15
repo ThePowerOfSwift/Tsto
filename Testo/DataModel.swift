@@ -11,8 +11,6 @@ import Contacts
 import ContactsUI
 
 
-
-
 class DataModel {
    
    static let shared = DataModel()
@@ -270,7 +268,7 @@ class DataModel {
    }
    
    //MARK: Create group and addContacts to it
-   func addContactToGroup(contactIdentifiers: [String], groupName: String) {
+   func creatGroupAndAddContacts(contactIdentifiers: [String], groupName: String) {
       // creatGroup
       let store = CNContactStore()
       var cotacto = CNContact()
@@ -281,23 +279,28 @@ class DataModel {
       grupo = newGroup
       saveRequest1.add(newGroup, toContainerWithIdentifier: nil)
       do { try store.execute(saveRequest1)
-         print ("saved")
+         print ("\n\n\n  *** SAVED GROUP NAME \(grupo.name)  ID # \(grupo.identifier)")
       } catch {  _ = NSError(domain: "testo creating contact error", code: 9999, userInfo: nil)
          print("error") }
       //Add contacts to group
       for id in contactIdentifiers  {
          do {
-            let keysToFetch = [CNContactIdentifierKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
+            let keysToFetch = [CNContactIdentifierKey,CNContactGivenNameKey,CNContactPhoneNumbersKey, CNContactImageDataKey, CNContactImageDataAvailableKey, CNContactFamilyNameKey, CNContactEmailAddressesKey, CNContactViewController.descriptorForRequiredKeys()] as [Any]
             cotacto = try store.unifiedContact(withIdentifier: id, keysToFetch:keysToFetch as! [CNKeyDescriptor])
          } catch let error{ print(error)}
-         let saveRequest2 = CNSaveRequest()
-         saveRequest2.addMember(cotacto, to: grupo)
-         // add contact to group
-         print("\n\n\n ***** ADDING CONTACT ******")
-         print("\n\n\n ***** \(cotacto) ******")
+         print("\n\n\n  *** FUNC PRINT  CONTACT GROUP AND CONTACT TO BE ADDED  ******")
+         print("Contact NAME: \(cotacto.givenName)")
+         print("Contact Identifier: \(cotacto.identifier)")
+         print("GROUP NAME: \(newGroup.name)")
+         print("GROUP Identifier: \(newGroup.identifier)")
          
+         let saveRequest2 = CNSaveRequest()
+         saveRequest2.addMember(cotacto, to: newGroup)
          do{
             try store.execute(saveRequest2)
+            print("\n\n\n ***** SAVED CONTACT ADDED  ******")
+            print("\n\n\n ***** NAME \(cotacto.givenName)  GROUP \(newGroup.name)******")
+
          } catch let error{
             print(error)
          }
@@ -307,7 +310,7 @@ class DataModel {
    
    
    //MARK: ADD ONE CONTACT TO  A GROUP
-   func addContactToGroup(contactIdentifier: String, groupID: String) {
+   func addONEContactToGroup(contactIdentifier: String, groupID: String) {
       // creatGroup
       let store = CNContactStore()
       var cotactoFeched = CNContact()
@@ -344,6 +347,9 @@ class DataModel {
    }
    
 // //MARK: DELITING  #######################################################################################<<<<<<<
+   
+   
+   
    
    //MARK: DElete group
    func deleteGroup(group: String) {

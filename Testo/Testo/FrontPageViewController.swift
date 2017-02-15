@@ -30,7 +30,7 @@ class FrontPageViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       contactAcces()
-      NotificationCenter.default.addObserver(self, selector: #selector(FrontPageViewController.refreshContacts), name: NSNotification.Name(rawValue: "CNContactStoreDidChangeNotification"), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(FrontPageViewController.refreshContacts), name: NSNotification.Name.CNContactStoreDidChange, object: nil)
    }
    
    func refreshContacts() {

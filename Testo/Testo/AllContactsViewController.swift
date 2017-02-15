@@ -79,6 +79,8 @@ class AllContactsViewController: UIViewController, UICollectionViewDataSource,  
       if contacts[indexPath.item].imageDataAvailable {
          let image = UIImage(data: contacts[indexPath.row].imageData!)
          cell.imageView.image = image
+
+
       }
       
       return cell

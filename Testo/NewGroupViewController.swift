@@ -28,8 +28,8 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func saveButton(_ sender: UIButton) {
       groupName = newGroupNameTextfield.text!
-      let ids = getArrayofContactsID()
-      cModel.addContactToGroup(contactIdentifiers: ids, groupName: groupName)
+      let contactsIds = getArrayofContactsID()
+      cModel.creatGroupAndAddContacts(contactIdentifiers: contactsIds, groupName: groupName)
       dismiss(animated: true, completion: nil)
    }// END Button
    
@@ -62,16 +62,12 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
          cell?.photo.image = image
          cell?.photo.layer.cornerRadius = (cell?.photo.frame.size.width)! / 2;
          cell?.photo.clipsToBounds = true
-//
-//         cell?.photo.layer.cornerRadius = 0.25
-         //cell?.photo.layer.borderWidth = 1.5
       }
       return cell!
    }//end of == tableView func
    
    //MARK: Select multiple rows and  put a check mark in the row
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      print("selected  \(contacts[indexPath.row])")
       if let cell = tableView.cellForRow(at: indexPath) {
          if cell.isSelected {
             cell.accessoryType = .checkmark
@@ -79,19 +75,19 @@ class NewGroupViewController: UIViewController, UITableViewDelegate, UITableView
       }
       if let sr = tableView.indexPathsForSelectedRows {
          selectedCountLabel.text = String (sr.count)
-         print("didDeselectRowAtIndexPath selected rows:\(sr)")
+         print("\n\n ####  CELL # SELECTED CONTACT AT INDEXPATH :\(sr)")
+         print("\n\n  SELECTED CONTACT NAME  :\(contacts[indexPath.row].givenName )")
+         print("\n\n  SELECTED CONTACT IDENTIFIRE  :\(contacts[indexPath.row].identifier )")
       }
    }
    
    //MARK: UnSelect multiple rows and  take out the  check mark in the row
    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-      print("deselected  \(contacts[indexPath.row])")
       if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
          cell.accessoryType = .none
       }
       if let sr = tableView.indexPathsForSelectedRows {
-         selectedCountLabel.text = sr.count as? String
-         print("didDeselectRowAtIndexPath selected rows:\(sr)")
+        selectedCountLabel.text = sr.count as? String
       }
    }
    
